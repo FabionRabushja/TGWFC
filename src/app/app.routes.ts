@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
 import {EMPTY_PATH, VIEW_PATH} from "./crossconcern/utilities/properties/path.property";
-import {ViewComponent} from "./ui/views";
-import {VIEW_ROUTES} from "./ui/views/view.routes";
+import {ViewComponent} from "./ui/view";
+import {VIEW_ROUTES} from "./ui/view/view.routes";
 
 // TODO: Add no content
 export const ROUTES: Routes = [
