@@ -12,14 +12,14 @@ export class ErrorHandlerHelper implements ErrorHandler {
     public handleError(error: Error) {
         // Sentry.captureException(error);
         if (error instanceof HttpErrorResponse) {
-            logData("http error response");
+            logData('http error response');
             // return an observable with a agent-facing error message
             return throwError(error);
         }
-            logData(error);
-            logData("no http error response");
+        logData(error);
+        logData('no http error response');
             // return an observable with a agent-facing error message
-            return throwError(error);
+        return throwError(error);
 
     }
 
@@ -34,18 +34,18 @@ export class ErrorHandlerHelper implements ErrorHandler {
     private handleHttpError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
-            logData("An error occurred: " + error.error.message);
+            logData('An error occurred: ' + error.error.message);
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
-            logData("Backend error: ");
+            logData('Backend error: ');
             logData(error.error);
         }
         // return throwError('Something bad happened; please try again later.');
     }
 
     private handleLocalError(error: Error) {
-        logData("local error " + error.message);
+        logData('local error ' + error.message);
         // return throwError(error.message);
     }
 

@@ -4,7 +4,8 @@ import {VIEW_SELECTOR} from '../../crossconcern/utilities/properties/selector.pr
 
 @Component({
     selector: VIEW_SELECTOR,
-    templateUrl: './view.component.html'
+    templateUrl: './view.component.html',
+    styleUrls: ['./view.scss']
 })
 export class ViewComponent {
 

@@ -1,0 +1,14 @@
+@import "../style/variables";
+@import "../style/styles";
+@import "ui/view/view";
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+
+
+app {
+  .button-1{
+    font-size: 40px;
+    color: $gameLightGrey;
+    background: $gameBlack;
+    box-shadow: 3px 3px 4px #00000066;
+  }
+}

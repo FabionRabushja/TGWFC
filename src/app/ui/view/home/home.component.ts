@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {VIEW_SELECTOR} from '../../../crossconcern/utilities/properties/selector.property';
+import { HOME_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
 
 @Component({
-    selector: VIEW_SELECTOR,
-    templateUrl: './home.component.html'
+    selector: HOME_SELECTOR,
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.scss'],
 })
 export class HomeComponent {
 
