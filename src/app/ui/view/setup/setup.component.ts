@@ -5,6 +5,7 @@ import { GameManager } from '../../../crossconcern/managers/game.manager';
 import { PackModel } from '../../../datastore/models/pack.model';
 import { logData } from '../../../crossconcern/helpers/generic/generic.helper';
 import {SETUP_PATH} from '../../../crossconcern/utilities/properties/path.property';
+import { Location } from "@angular/common";
 
 @Component({
     selector: SETUP_SELECTOR,
@@ -19,6 +20,7 @@ export class SetupComponent implements OnInit{
     public nothingSelected: boolean;
 
     constructor(protected router: Router,
+                protected location: Location,
                 protected gameManager: GameManager) {
         this.packs = [];
         this.rounds = [];
@@ -51,7 +53,7 @@ export class SetupComponent implements OnInit{
     }
 
     public onGoBack() {
-
+        this.location.back();
     }
 
 }

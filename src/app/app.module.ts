@@ -20,6 +20,9 @@ import { PackRepositoryInterface } from './datastore/repositories/pack/pack.inte
 import { PackRepository } from './datastore/repositories/pack/pack.repository';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {FormsModule} from '@angular/forms';
+import {SettingsComponent} from './ui/view/settings/settings.component';
+import {LocalStorageRepositoryInterface} from './datastore/local/localstorage.interface';
+import { LocalStorageRepository } from './datastore/local/localstorage.repository';
 
 
 // Providers
@@ -30,6 +33,7 @@ const APP_PROVIDERS = [
   // Managers
   GameManager,
   // Repositories
+  { provide: LocalStorageRepositoryInterface, useClass: LocalStorageRepository },
   { provide: RemoteRepositoryInterface, useClass: RemoteRepository },
   { provide: PackRepositoryInterface, useClass: PackRepository },
   // Helpers
@@ -47,6 +51,7 @@ export function createTranslateLoader(http: HttpClient) {
     ViewComponent,
     HomeComponent,
     SetupComponent,
+    SettingsComponent,
   ],
   imports: [
     NgbModule,

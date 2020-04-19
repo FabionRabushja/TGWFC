@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HOME_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
-import { SETUP_PATH } from '../../../crossconcern/utilities/properties/path.property';
+import {SETTINGS_PATH, SETUP_PATH} from '../../../crossconcern/utilities/properties/path.property';
 
 @Component({
     selector: HOME_SELECTOR,
@@ -15,5 +15,9 @@ export class HomeComponent {
 
     public onStartGameClick() {
         this.router.navigate(['/' + SETUP_PATH]);
+    }
+
+    public onSettingsClick() {
+        this.router.navigate(['/' + SETTINGS_PATH]);
     }
 }
