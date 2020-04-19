@@ -7,8 +7,15 @@ $loadingYellow: #ffa700;
 $loadingWhite: #eee;
 $loadingBackground: #aaa;
 
-$gameBlack: "#414141";
-$gameDarkGrey: "#5D5D5D";
-$gameGrey: "#838383";
-$gameLightGrey: "#F2F2F2"
+$gameBlack: #414141;
+$gameDarkGrey: #5D5D5D;
+$gameGrey: #838383;
+$gameLightGrey: #F2F2F2;
 
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
+);

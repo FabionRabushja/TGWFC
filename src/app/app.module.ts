@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './ui/app.component';
 import {WebsocketService} from './crossconcern/services/websocket.services';
@@ -11,6 +11,28 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import '../style/styles.scss';
+import {SetupComponent} from './ui/view/setup';
+import {ErrorHandlerHelper} from './crossconcern/helpers/errors/errorhandler.helper';
+import {GameManager} from './crossconcern/managers/game.manager';
+import {RemoteRepositoryInterface} from './datastore/remote/remote.interface';
+import { RemoteRepository } from './datastore/remote/remote.repository';
+import {PackRepositoryInterface} from './datastore/repositories/pack/pack.interface';
+import {PackRepository} from './datastore/repositories/pack/pack.repository';
+
+
+// Providers
+const APP_PROVIDERS = [
+  { provide: ErrorHandler, useClass: ErrorHandlerHelper },
+  //Services
+  WebsocketService,
+  // Managers
+  GameManager,
+  // Repositories
+  { provide: RemoteRepositoryInterface, useClass: RemoteRepository },
+  { provide: PackRepositoryInterface, useClass: PackRepository },
+  // Helpers
+  ErrorHandlerHelper,
+];
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -21,7 +43,8 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     ViewComponent,
-    HomeComponent
+    HomeComponent,
+    SetupComponent,
   ],
   imports: [
     NgbModule,
@@ -40,7 +63,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
   ],
   providers: [
-    WebsocketService
+    APP_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })

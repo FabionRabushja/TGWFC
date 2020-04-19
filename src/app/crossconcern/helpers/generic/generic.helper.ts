@@ -1,7 +1,7 @@
-import { LOGGING_ENABLED } from "../../utilities/properties/base.property";
+import {environment} from '../../../../environments/environment';
 
 export function logData(data: any) {
-    if (LOGGING_ENABLED) {
+    if (environment.logEnabled) {
         console.log(data);
     }
 }

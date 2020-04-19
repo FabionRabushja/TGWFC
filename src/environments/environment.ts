@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: ''
+  baseUrl: 'https://cah-back.herokuapp.com/api/',
+  logEnabled: true,
 };
 
 /*
