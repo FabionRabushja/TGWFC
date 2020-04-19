@@ -1,23 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {ErrorHandler, NgModule} from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './ui/app.component';
-import {WebsocketService} from './crossconcern/services/websocket.services';
-import {ViewComponent} from './ui/view';
-import {PreloadAllModules, RouterModule} from '@angular/router';
+import { WebsocketService } from './crossconcern/services/websocket.services';
+import { ViewComponent } from './ui/view';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
-import {HomeComponent} from './ui/view/home';
+import { HomeComponent } from './ui/view/home';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import '../style/styles.scss';
-import {SetupComponent} from './ui/view/setup';
-import {ErrorHandlerHelper} from './crossconcern/helpers/errors/errorhandler.helper';
-import {GameManager} from './crossconcern/managers/game.manager';
-import {RemoteRepositoryInterface} from './datastore/remote/remote.interface';
+import { SetupComponent } from './ui/view/setup';
+import { ErrorHandlerHelper } from './crossconcern/helpers/errors/errorhandler.helper';
+import { GameManager } from './crossconcern/managers/game.manager';
+import { RemoteRepositoryInterface } from './datastore/remote/remote.interface';
 import { RemoteRepository } from './datastore/remote/remote.repository';
-import {PackRepositoryInterface} from './datastore/repositories/pack/pack.interface';
-import {PackRepository} from './datastore/repositories/pack/pack.repository';
+import { PackRepositoryInterface } from './datastore/repositories/pack/pack.interface';
+import { PackRepository } from './datastore/repositories/pack/pack.repository';
+import { NgSelectModule } from '@ng-select/ng-select';
+import {FormsModule} from '@angular/forms';
 
 
 // Providers
@@ -61,6 +63,8 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    NgSelectModule,
+    FormsModule,
   ],
   providers: [
     APP_PROVIDERS

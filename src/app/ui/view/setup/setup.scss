@@ -1,10 +1,40 @@
 @import "../../../../style/_variables.scss";
 
+.setup{
+  padding-top: 5%;
 
-.name {
-  display: block;
-  width: 80%;
-  text-align: left;
-  font-size: 2.5rem;
-  font-weight: bold;
+  span{
+    font-size: 2rem !important;
+  }
+
+  .name{
+    text-align: left;
+    font-size: 2.5rem !important;
+    font-weight: bold;
+  }
+
+  .clicked, .nothing-selected{
+    background: $gameDarkGrey;
+    color: $gameLightGrey;
+  }
+
+  .scroll{
+    height: 400px;
+  }
+
+  .nothing-selected{
+
+  }
+
+  ng-select{
+    box-shadow: 3px 3px 4px #00000066;
+    background: $gameGrey2;
+    font-size: 35px;
+    width: 12%;
+  }
+
+
+
+
 }
+

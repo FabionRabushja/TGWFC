@@ -1,18 +1,42 @@
-<div class="container-fluid h-100 my-auto">
-    <div class="row h-100 d-flex justify-content-center">
-        <div class="col-4 my-auto">
-            <span class="name">{{"The Game"}}</span>
-            <span class="name">{{"With Funny Cards"}}</span>
-            <button class="mt-5 p-3 w-100 button-1"
-                    (click)="onStartGameClick()">
-                <span>Start a Game</span>
-            </button>
-            <button class="mt-5 p-3 w-100 button-2">
-                <span>Participate</span>
-            </button>
-            <button class="mt-5 p-3 w-100 button-3">
-                <span>Settings</span>
-            </button>
+<div class="container-fluid h-100">
+    <div class="row setup">
+        <div class="col-4 offset-1">
+            <span class="name">{{"Setup your game"}}</span>
+            <div class="mt-5">
+                <span>{{"Number of rounds"}}</span>
+                <ng-select
+                        class="custom rounded float-right"
+                        [items]="rounds"
+                        [(ngModel)]="selectedRound"
+                        bindValue="id"
+                        bindLabel="name">
+                </ng-select>
+            </div>
+            <div class="mt-5">
+                <span class="d-block">Card packs</span>
+                <div class="overflow-auto px-1 scroll">
+                    <button *ngFor="let pack of packs" class="button-4 w-100 p-2 text-left mt-4" (click)="onPackSelect(pack)" [ngClass]="{'clicked': pack.clicked}">
+                        <span>{{ pack.name }}</span>
+                    </button>
+                    <button *ngFor="let pack of packs" class="button-4 w-100 p-2 text-left mt-4" (click)="onPackSelect(pack)" [ngClass]="{'clicked': pack.clicked}">
+                        <span>{{ pack.name }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 offset-2 h-100 my-auto">
+            <div class="row h-100 d-flex justify-content-center">
+                <button *ngIf="!nothingSelected" class="button-1 w-100 p-2 mt-4" (click)="onStartGame()">
+                    <span>{{ "Create game"}}</span>
+                </button>
+                <button *ngIf="nothingSelected" class="button-2 w-100 p-2 mt-4">
+                    <span>{{ "Select at least a card pack!"}}</span>
+                </button>
+
+                <button class="button-5 w-100 p-2 mt-4" (click)="onGoBack()">
+                    <span>{{ "Go Back"}}</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>

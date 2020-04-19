@@ -38,3 +38,19 @@ main {
     border-radius: 15px;
 }
 
+.button-4{
+    font-size: 2rem;
+    color: $gameDarkGrey;
+    background: #ffffff;
+    border: 1px solid $gameDarkGrey;
+    box-shadow: 3px 3px 4px #00000066;
+    border-radius: 15px;
+}
+
+.button-5{
+    font-size: 2rem;
+    color: $gameBlack;
+    background: transparent;
+    border: none;
+}
+

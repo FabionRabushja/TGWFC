@@ -12,6 +12,7 @@ export class PackRepository implements PackRepositoryInterface {
 
     public getPacks(): Observable<PackModel[]> {
         return this.remoteRepository.get("packs").pipe(
+            map(response => response["packs"]),
             map((packs: []) => packs.map(pack => new PackModel(pack as JSON)))
         )
     }
