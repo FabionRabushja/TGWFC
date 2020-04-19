@@ -4,13 +4,13 @@
             <span class="name">{{"Setup your game"}}</span>
             <div class="mt-5">
                 <span>{{"Number of rounds"}}</span>
-                <ng-select
-                        class="custom rounded float-right"
-                        [items]="rounds"
-                        [(ngModel)]="selectedRound"
-                        bindValue="id"
-                        bindLabel="name">
-                </ng-select>
+                <select
+                        class="custom rounded float-right p-2"
+                        [(ngModel)]="selectedRound">
+                    <option *ngFor="let round of rounds" [ngValue]="round.id">
+                        {{ round.name}}
+                    </option>
+                </select>
             </div>
             <div class="mt-5">
                 <span class="d-block">Card packs</span>

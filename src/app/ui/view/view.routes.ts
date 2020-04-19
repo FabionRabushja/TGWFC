@@ -1,8 +1,16 @@
 import { Routes } from '@angular/router';
-import {EMPTY_PATH, HOME_PATH, SETTINGS_PATH, SETUP_PATH, VIEW_PATH} from '../../crossconcern/utilities/properties/path.property';
+import {
+    EMPTY_PATH,
+    HOME_PATH,
+    LOBBY_PATH,
+    SETTINGS_PATH,
+    SETUP_PATH,
+    VIEW_PATH
+} from '../../crossconcern/utilities/properties/path.property';
 import {HomeComponent} from './home';
 import {SetupComponent} from './setup';
 import {SettingsComponent} from './settings/settings.component';
+import {LobbyComponent} from './lobby';
 
 export const VIEW_ROUTES: Routes = [
     { path: EMPTY_PATH, redirectTo: HOME_PATH, pathMatch: 'full' },
@@ -10,5 +18,6 @@ export const VIEW_ROUTES: Routes = [
     { path: HOME_PATH, component: HomeComponent },
     { path: SETUP_PATH, component: SetupComponent },
     { path: SETTINGS_PATH, component: SettingsComponent },
+    { path: LOBBY_PATH + "/:id", component: LobbyComponent}
 
 ];

@@ -20,6 +20,7 @@ main {
     background: $gameBlack;
     box-shadow: 3px 3px 4px #00000066;
     border-radius: 15px;
+    border: none;
 }
 
 .button-2{
@@ -28,6 +29,7 @@ main {
     background: $gameDarkGrey;
     box-shadow: 3px 3px 4px #00000066;
     border-radius: 15px;
+    border: none;
 }
 
 .button-3{
@@ -36,6 +38,7 @@ main {
     background: $gameGrey;
     box-shadow: 3px 3px 4px #00000066;
     border-radius: 15px;
+    border: none;
 }
 
 .button-4{
@@ -43,7 +46,6 @@ main {
     color: $gameDarkGrey;
     background: #ffffff;
     border: 1px solid $gameDarkGrey;
-    box-shadow: 3px 3px 4px #00000066;
     border-radius: 15px;
 }
 

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './ui/app.component';
-import { WebsocketService } from './crossconcern/services/websocket.services';
+import { WebsocketService } from './crossconcern/webscoket/websocket.services';
 import { ViewComponent } from './ui/view';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
@@ -23,6 +23,7 @@ import {FormsModule} from '@angular/forms';
 import {SettingsComponent} from './ui/view/settings/settings.component';
 import {LocalStorageRepositoryInterface} from './datastore/local/localstorage.interface';
 import { LocalStorageRepository } from './datastore/local/localstorage.repository';
+import {LobbyComponent} from './ui/view/lobby';
 
 
 // Providers
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
     HomeComponent,
     SetupComponent,
     SettingsComponent,
+    LobbyComponent,
   ],
   imports: [
     NgbModule,
