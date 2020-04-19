@@ -6,4 +6,6 @@ export const HOME_PATH = 'home';
 export const SETUP_PATH = 'setup';
 export const SETTINGS_PATH = 'settings';
 export const LOBBY_PATH = 'lobby';
+export const SHARE_PATH = 'share';
+
 

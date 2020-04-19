@@ -11,13 +11,14 @@ import {HomeComponent} from './home';
 import {SetupComponent} from './setup';
 import {SettingsComponent} from './settings/settings.component';
 import {LobbyComponent} from './lobby';
+import {GuardHelper} from '../../crossconcern/helpers/generic/guard.helper';
 
 export const VIEW_ROUTES: Routes = [
     { path: EMPTY_PATH, redirectTo: HOME_PATH, pathMatch: 'full' },
     { path: VIEW_PATH, redirectTo: HOME_PATH, pathMatch: 'full' },
     { path: HOME_PATH, component: HomeComponent },
-    { path: SETUP_PATH, component: SetupComponent },
+    { path: SETUP_PATH, component: SetupComponent, canActivate: [GuardHelper]},
     { path: SETTINGS_PATH, component: SettingsComponent },
-    { path: LOBBY_PATH + "/:id", component: LobbyComponent}
+    { path: LOBBY_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]}
 
 ];

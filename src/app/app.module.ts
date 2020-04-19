@@ -24,11 +24,15 @@ import {SettingsComponent} from './ui/view/settings/settings.component';
 import {LocalStorageRepositoryInterface} from './datastore/local/localstorage.interface';
 import { LocalStorageRepository } from './datastore/local/localstorage.repository';
 import {LobbyComponent} from './ui/view/lobby';
+import { GuardHelper } from './crossconcern/helpers/generic/guard.helper';
+import {DialogComponent} from './ui/components/dialog/dialog.component';
 
 
 // Providers
 const APP_PROVIDERS = [
   { provide: ErrorHandler, useClass: ErrorHandlerHelper },
+  //Helpers
+  GuardHelper,
   //Services
   WebsocketService,
   // Managers
@@ -48,12 +52,15 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ViewComponent,
-    HomeComponent,
-    SetupComponent,
-    SettingsComponent,
-    LobbyComponent,
+      AppComponent,
+      ViewComponent,
+      HomeComponent,
+      SetupComponent,
+      SettingsComponent,
+      LobbyComponent,
+
+      // Components
+      DialogComponent,
   ],
   imports: [
     NgbModule,

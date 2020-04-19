@@ -1,3 +1,9 @@
+<div *ngIf="showUsernameDialog">
+    <dialog-selector [label]="'Insert your username'" (onConfirm)="onConfirmClick($event)"></dialog-selector>
+</div>
+<div *ngIf="showAddLinkDialog">
+    <dialog-selector [label]="'Insert the lobby link'" (onConfirm)="onConfirmClick($event)"></dialog-selector>
+</div>
 <div class="container-fluid h-100 my-auto">
     <div class="row h-100 d-flex justify-content-center">
         <div class="col-4 my-auto">

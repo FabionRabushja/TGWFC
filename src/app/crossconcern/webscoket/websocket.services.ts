@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import * as io from 'socket.io-client';
 import {CREATE_ROOM, CREATE_ROOM_REPLY} from '../utilities/properties/events.property';
-import {logData} from '../helpers/generic/generic.helper';
 import {Observable, Subject} from 'rxjs';
+import {logData} from '../helpers/generic/generic.helper';
 
 
 @Injectable({
@@ -15,32 +15,37 @@ export class WebsocketService {
   private socket;
 
   public setupSocketConnection() {
-    this.socket = io(this.url);
-    this.socket.connect();
-    this.socket.on('connect', () => {})
+      this.socket = io(this.url);
+      logData(this.socket);
+      this.socket.connect();
+      this.socket.on('connect', () => {});
+  }
+
+  public getSocket() {
+      return this.socket;
   }
 
   public setupListenerOnCreateRoom(): Subject<any>{
 
-    let observable = new Observable(observer => {
-      this.socket.on(CREATE_ROOM_REPLY, (data) => {
-        observer.next(data);
+      let observable = new Observable(observer => {
+          this.socket.on(CREATE_ROOM_REPLY, (data) => {
+            observer.next(data);
+          });
+          return () => {
+            this.socket.disconnect();
+          }
       });
-      return () => {
-        this.socket.disconnect();
-      }
-    });
 
-    let observer = {
-      next: (data: Object) => {
-        this.socket.emit('message', JSON.stringify(data));
-      },
-    };
+      let observer = {
+          next: (data: Object) => {
+            this.socket.emit('message', JSON.stringify(data));
+          },
+      };
 
-    return Subject.create(observer, observable);
+      return Subject.create(observer, observable);
   }
 
   public createRoom(obj: any) {
-    this.socket.emit(CREATE_ROOM, obj);
+      this.socket.emit(CREATE_ROOM, obj);
   }
 }

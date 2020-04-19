@@ -1,0 +1,20 @@
+@import "../../../../style/_variables.scss";
+
+.dialog{
+  position: absolute;
+  z-index: 9;
+  background: #00000080;
+
+  .dialog-form{
+    border-radius: 15px;
+    background: white;
+  };
+
+  .name {
+    display: block;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+}

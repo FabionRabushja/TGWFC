@@ -4,3 +4,6 @@ export const HOME_SELECTOR = 'home';
 export const SETTINGS_SELECTOR = 'settings';
 export const SETUP_SELECTOR = 'setup';
 export const LOBBY_SELECTOR = 'lobby';
+
+//Components
+export const DIALOG_SELECTOR = 'dialog-selector';
