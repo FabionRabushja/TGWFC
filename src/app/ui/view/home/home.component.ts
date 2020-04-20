@@ -77,6 +77,7 @@ export class HomeComponent implements OnInit{
     }
 
     public onParticipateClick() {
+        this.onParticipate = true;
         if (this.checkUsername()) {
             this.showAddLinkDialog = true;
         } else {
@@ -85,6 +86,7 @@ export class HomeComponent implements OnInit{
     }
 
     public onStartGameClick() {
+        this.onParticipate = false;
         if (this.checkUsername()) {
             this.router.navigate(['/' + SETUP_PATH]);
         } else {

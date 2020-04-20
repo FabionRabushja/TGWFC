@@ -1,8 +1,12 @@
 <div *ngIf="showUsernameDialog">
-    <dialog-selector [label]="'Insert your username'" (onConfirm)="setUsername($event)"></dialog-selector>
+    <dialog-selector [label]="'Insert your username'"
+                     (onConfirm)="setUsername($event)"
+                     (onFocusOut)="showUsernameDialog=false"></dialog-selector>
 </div>
 <div *ngIf="showAddLinkDialog">
-    <dialog-selector [label]="'Insert the lobby link'" (onConfirm)="setLobbyLink($event)"></dialog-selector>
+    <dialog-selector [label]="'Insert the lobby link'"
+                     (onConfirm)="setLobbyLink($event)"
+                     (onFocusOut)="showAddLinkDialog=false"></dialog-selector>
 </div>
 <div class="container-fluid h-100 my-auto">
     <div class="row h-100 d-flex justify-content-center">
