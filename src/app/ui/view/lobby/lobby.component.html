@@ -19,7 +19,7 @@
         </div>
         <div class="col-4 offset-xl-2 offset-lg-1 my-auto">
             <div class="row">
-                <host-selector [host]="host"></host-selector>
+                <host-selector [host]="host" [roomId]="roomId"></host-selector>
                 <button *ngIf="!sharedLinkUser && users.length <= 0" disabled class="button-3 w-100 p-2 mt-n">
                     <span>{{ "Waiting for participants"}}</span>
                 </button>

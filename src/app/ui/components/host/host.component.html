@@ -2,7 +2,7 @@
     <div class="row px-3 d-flex">
         <span class="game-host">{{"Game host:"}}</span>
         <span class="host-name">{{host}}</span>
-        <button class="mt-4 p-3 w-100 button-4 copy-button" (click)="onCopyMatchLinkClick()">{{"Copy link to this match"}}</button>
+        <button class="mt-4 p-3 w-100 button-4 copy-button" (click)="onCopyMatchLinkClick($event)">{{"Copy link to this match"}}</button>
         <button class="mt-4 p-3 w-100 button-4 leave-button" (click)="onLeaveMatchClick()">{{"Leave the match"}}</button>
     </div>
 </div>

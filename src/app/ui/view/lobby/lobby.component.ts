@@ -17,6 +17,7 @@ export class LobbyComponent implements OnInit{
     public users: UserModel[];
     public host: string;
     public sharedLinkUser: boolean;
+    public roomId: string;
     constructor(protected router: Router,
                 protected activeRoute: ActivatedRoute,
                 protected localStorageRepository: LocalStorageRepositoryInterface,
@@ -28,6 +29,7 @@ export class LobbyComponent implements OnInit{
         this.activeRoute.params.subscribe(
             (params) => {
                 const url = this.activeRoute.snapshot.url[0].path;
+                this.roomId = params["id"];
                 if (url === LOBBY_PATH) {
                     this.host = this.localStorageRepository.getUsername();
                 } else if (url === LOBBY_LINK_PATH) {
@@ -47,7 +49,15 @@ export class LobbyComponent implements OnInit{
                 }
             });
         });
+
+        this.websocketService.setupListenerOnLeaveRoomReply().subscribe((data) =>{
+            logData("LeaveRoom");
+            logData(data);
+        });
+
+        this.websocketService.setupListenerOnUserDisconnected().subscribe((data) => {
+            const user = new UserModel(data["user_left"]);
+            this.users = this.users.filter((item) => item === user);
+        });
     }
-
-
 }
