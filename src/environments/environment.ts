@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'https://cah-back.herokuapp.com/api/',
-  websocketUrl: "ws://cah-back.herokuapp.com/",
+  websocketUrl: "https://cah-back.herokuapp.com/",
   logEnabled: true,
 };
 
