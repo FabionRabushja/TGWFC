@@ -7,6 +7,7 @@ import { Location } from "@angular/common";
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
 import { LOBBY_PATH } from '../../../crossconcern/utilities/properties/path.property';
+import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
 
 @Component({
     selector: SETUP_SELECTOR,
@@ -36,7 +37,7 @@ export class SetupComponent implements OnInit{
     public ngOnInit(): void {
         this.gameManager.getPacks().subscribe((packs: PackModel[]) => {
             this.packs = [...packs];
-            this.websocketService.setupListenerOnCreateRoom().asObservable().subscribe((value) => {
+            this.websocketService.setupListenerOnCreateRoom().subscribe((value) => {
                 this.router.navigate(["/" + LOBBY_PATH + "/" + value["room"].id]);
             });
         })

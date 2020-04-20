@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {
     EMPTY_PATH,
-    HOME_PATH,
+    HOME_PATH, LOBBY_LINK_PATH,
     LOBBY_PATH,
     SETTINGS_PATH,
     SETUP_PATH,
@@ -19,6 +19,7 @@ export const VIEW_ROUTES: Routes = [
     { path: HOME_PATH, component: HomeComponent },
     { path: SETUP_PATH, component: SetupComponent, canActivate: [GuardHelper]},
     { path: SETTINGS_PATH, component: SettingsComponent },
-    { path: LOBBY_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]}
+    { path: LOBBY_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]},
+    { path: LOBBY_LINK_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]}
 
 ];

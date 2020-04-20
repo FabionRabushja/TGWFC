@@ -1,9 +1,44 @@
 @import "../../../../style/_variables.scss";
 
-.name {
-  display: block;
-  width: 80%;
-  text-align: left;
-  font-size: 2.5rem;
-  font-weight: bold;
+.lobby{
+  padding-top: 5%;
+
+  span{
+    font-size: 35px !important;
+  }
+
+  .name{
+    text-align: left;
+    font-size: 50px !important;
+    font-weight: bold;
+  }
+
+  .button-2{
+    box-shadow: none;
+  }
+
+  .clicked, .nothing-selected{
+    background: $gameDarkGrey;
+    color: $gameLightGrey;
+    box-shadow: 3px 3px 4px #00000066;
+  }
+
+  .no-users{
+    color: $gameDarkGrey;
+    font-size: 33px !important;
+  }
+
+  .scroll{
+    height: 400px;
+  }
+
+  select{
+    box-shadow: 3px 3px 4px #00000066;
+    background: $gameGrey2;
+    color: $gameLightGrey;
+    font-size: 35px;
+    width: 18%;
+    height: calc(1.2em + 20px);
+
+  }
 }

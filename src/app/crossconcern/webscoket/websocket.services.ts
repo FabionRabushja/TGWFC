@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import * as io from 'socket.io-client';
-import {CREATE_ROOM, CREATE_ROOM_REPLY} from '../utilities/properties/events.property';
-import {Observable, Subject} from 'rxjs';
+import {CREATE_ROOM, CREATE_ROOM_REPLY, JOIN_ROOM, JOIN_ROOM_REPLY} from '../utilities/properties/events.property';
+import { Observable } from 'rxjs';
 import {logData} from '../helpers/generic/generic.helper';
 
 
@@ -25,9 +25,8 @@ export class WebsocketService {
       return this.socket;
   }
 
-  public setupListenerOnCreateRoom(): Subject<any>{
-
-      let observable = new Observable(observer => {
+  public setupListenerOnCreateRoom(): Observable<any> {
+      return new Observable(observer => {
           this.socket.on(CREATE_ROOM_REPLY, (data) => {
             observer.next(data);
           });
@@ -35,17 +34,24 @@ export class WebsocketService {
             this.socket.disconnect();
           }
       });
+  }
 
-      let observer = {
-          next: (data: Object) => {
-            this.socket.emit('message', JSON.stringify(data));
-          },
-      };
-
-      return Subject.create(observer, observable);
+  public setupListenerOnJoinRoomReply(): Observable<any> {
+      return new Observable(observer => {
+          this.socket.on(JOIN_ROOM_REPLY, (data) => {
+              observer.next(data);
+          });
+          return () => {
+              this.socket.disconnect();
+          }
+      });
   }
 
   public createRoom(obj: any) {
       this.socket.emit(CREATE_ROOM, obj);
+  }
+
+  public joinRoom(obj: any) {
+      this.socket.emit(JOIN_ROOM, obj);
   }
 }

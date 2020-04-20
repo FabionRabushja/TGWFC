@@ -1,8 +1,8 @@
 <div *ngIf="showUsernameDialog">
-    <dialog-selector [label]="'Insert your username'" (onConfirm)="onConfirmClick($event)"></dialog-selector>
+    <dialog-selector [label]="'Insert your username'" (onConfirm)="setUsername($event)"></dialog-selector>
 </div>
 <div *ngIf="showAddLinkDialog">
-    <dialog-selector [label]="'Insert the lobby link'" (onConfirm)="onConfirmClick($event)"></dialog-selector>
+    <dialog-selector [label]="'Insert the lobby link'" (onConfirm)="setLobbyLink($event)"></dialog-selector>
 </div>
 <div class="container-fluid h-100 my-auto">
     <div class="row h-100 d-flex justify-content-center">
@@ -13,7 +13,8 @@
                     (click)="onStartGameClick()">
                 <span>Start a Game</span>
             </button>
-            <button class="mt-5 p-3 w-100 button-2">
+            <button class="mt-5 p-3 w-100 button-2"
+                    (click)="onParticipateClick()">
                 <span>Participate</span>
             </button>
             <button class="mt-5 p-3 w-100 button-3"
