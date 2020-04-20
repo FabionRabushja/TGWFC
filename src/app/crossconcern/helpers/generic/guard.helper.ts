@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, Router } from "@angular/router";
 import { WebsocketService } from '../../webscoket/websocket.services';
+import {logData} from './generic.helper';
 
 @Injectable()
 export class GuardHelper implements CanActivate {

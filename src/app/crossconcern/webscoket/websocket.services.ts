@@ -21,15 +21,17 @@ export class WebsocketService {
   private url = environment.websocketUrl;
   private socket;
 
-  public disconnect() {
-      this.socket.disconnect();
-  }
+
 
   public setupSocketConnection() {
       this.socket = io(this.url);
       logData(this.socket);
       this.socket.connect();
       this.socket.on('connect', () => {});
+  }
+
+  public disconnect() {
+      this.socket = null;
   }
 
   public getSocket() {

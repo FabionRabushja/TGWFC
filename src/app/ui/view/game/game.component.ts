@@ -37,6 +37,11 @@ export class GameComponent implements OnInit{
             self.websocketService.disconnect()
         };
 
+        window.onpopstate = function(event) {
+            logData("tre");
+            self.websocketService.disconnect();
+        };
+
         this.websocketService.setupListenerOnUserDisconnected().subscribe((data) => {
             const user = new UserModel(data["user_left"]);
             this.users = this.users.filter((item) => item === user);

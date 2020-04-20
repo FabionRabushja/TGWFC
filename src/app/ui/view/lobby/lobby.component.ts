@@ -40,7 +40,11 @@ export class LobbyComponent implements OnInit{
 
         const self = this;
         window.onbeforeunload = function() {
-            self.websocketService.disconnect()
+            self.websocketService.disconnect();
+        };
+
+        window.onpopstate = function(event) {
+            self.websocketService.disconnect();
         };
 
         this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) => {
