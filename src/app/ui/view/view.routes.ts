@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import {
-    EMPTY_PATH,
+    EMPTY_PATH, GAME_PATH,
     HOME_PATH, LOBBY_LINK_PATH,
     LOBBY_PATH,
     SETTINGS_PATH,
@@ -12,6 +12,7 @@ import {SetupComponent} from './setup';
 import {SettingsComponent} from './settings/settings.component';
 import {LobbyComponent} from './lobby';
 import {GuardHelper} from '../../crossconcern/helpers/generic/guard.helper';
+import {GameComponent} from './game';
 
 export const VIEW_ROUTES: Routes = [
     { path: EMPTY_PATH, redirectTo: HOME_PATH, pathMatch: 'full' },
@@ -20,6 +21,6 @@ export const VIEW_ROUTES: Routes = [
     { path: SETUP_PATH, component: SetupComponent, canActivate: [GuardHelper]},
     { path: SETTINGS_PATH, component: SettingsComponent },
     { path: LOBBY_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]},
-    { path: LOBBY_LINK_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]}
-
+    { path: LOBBY_LINK_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]},
+    { path: GAME_PATH, component: GameComponent, canActivate: [GuardHelper]},
 ];

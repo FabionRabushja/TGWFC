@@ -23,7 +23,9 @@
                 <button *ngIf="!sharedLinkUser && users.length <= 0" disabled class="button-3 w-100 p-2 mt-n">
                     <span>{{ "Waiting for participants"}}</span>
                 </button>
-                <button *ngIf="!sharedLinkUser && users.length >= 1" class="button-1 w-100 p-2 mt-n">
+                <button *ngIf="!sharedLinkUser && users.length >= 1"
+                        class="button-1 w-100 p-2 mt-n"
+                        (click)="onStartGameClick()">
                     <span>{{ "Start the game!"}}</span>
                 </button>
             </div>

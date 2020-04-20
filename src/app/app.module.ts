@@ -27,6 +27,7 @@ import {LobbyComponent} from './ui/view/lobby';
 import { GuardHelper } from './crossconcern/helpers/generic/guard.helper';
 import {DialogComponent} from './ui/components/dialog/dialog.component';
 import {HostComponent} from './ui/components/host/host.component';
+import {GameComponent} from './ui/view/game';
 
 
 // Providers
@@ -59,10 +60,11 @@ export function createTranslateLoader(http: HttpClient) {
       SetupComponent,
       SettingsComponent,
       LobbyComponent,
-      HostComponent,
+      GameComponent,
 
       // Components
       DialogComponent,
+      HostComponent,
   ],
   imports: [
     NgbModule,

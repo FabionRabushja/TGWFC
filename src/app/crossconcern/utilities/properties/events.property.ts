@@ -6,3 +6,4 @@ export const LEAVE_ROOM = "leaveRoom";
 export const LEAVE_ROOM_REPLY = "leaveRoomReply";
 export const USER_DISCONECTED = "userDisconnected";
 export const START_GAME = "startGame";
+export const START_GAME_REPLY = "startGameReply";

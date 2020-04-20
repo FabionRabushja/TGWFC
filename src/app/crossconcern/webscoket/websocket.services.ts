@@ -7,7 +7,7 @@ import {
     JOIN_ROOM,
     JOIN_ROOM_REPLY,
     LEAVE_ROOM,
-    LEAVE_ROOM_REPLY, USER_DISCONECTED
+    LEAVE_ROOM_REPLY, START_GAME, START_GAME_REPLY, USER_DISCONECTED
 } from '../utilities/properties/events.property';
 import { Observable } from 'rxjs';
 import {logData} from '../helpers/generic/generic.helper';
@@ -20,6 +20,10 @@ export class WebsocketService {
 
   private url = environment.websocketUrl;
   private socket;
+
+  public disconnect() {
+      this.socket.disconnect();
+  }
 
   public setupSocketConnection() {
       this.socket = io(this.url);
@@ -76,6 +80,17 @@ export class WebsocketService {
       });
   }
 
+  public setupListenerOnStartGameReply(): Observable<any> {
+      return new Observable(observer => {
+          this.socket.on(START_GAME_REPLY, (data) => {
+              observer.next(data);
+          });
+          return () => {
+              this.socket.disconnect();
+          }
+      });
+  }
+
   public createRoom(obj: any) {
       this.socket.emit(CREATE_ROOM, obj);
   }
@@ -86,5 +101,9 @@ export class WebsocketService {
 
   public joinRoom(obj: any) {
       this.socket.emit(JOIN_ROOM, obj);
+  }
+
+  public startGame(obj: any) {
+      this.socket.emit(START_GAME, obj);
   }
 }

@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LOBBY_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
-import {WebsocketService} from '../../../crossconcern/webscoket/websocket.services';
-import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
-import {UserModel} from '../../../datastore/models/user.model';
-import {LOBBY_LINK_PATH, LOBBY_PATH, SHARE_PATH} from '../../../crossconcern/utilities/properties/path.property';
+import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
+import { UserModel } from '../../../datastore/models/user.model';
+import {GAME_PATH, LOBBY_LINK_PATH, LOBBY_PATH} from '../../../crossconcern/utilities/properties/path.property';
 import {LocalStorageRepositoryInterface} from '../../../datastore/local/localstorage.interface';
+import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
 
 @Component({
     selector: LOBBY_SELECTOR,
@@ -38,8 +38,12 @@ export class LobbyComponent implements OnInit{
             }
         );
 
+        const self = this;
+        window.onbeforeunload = function() {
+            self.websocketService.disconnect()
+        };
+
         this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) => {
-            logData(data);
             data["lobby_users"].forEach((user) => {
                 const userModel = new UserModel(user);
                 if (!userModel.host) {
@@ -58,6 +62,22 @@ export class LobbyComponent implements OnInit{
         this.websocketService.setupListenerOnUserDisconnected().subscribe((data) => {
             const user = new UserModel(data["user_left"]);
             this.users = this.users.filter((item) => item === user);
+        });
+
+        this.websocketService.setupListenerOnStartGameReply().subscribe((data) => {
+            let route = this.router.config[0].children.find(r => r.path === GAME_PATH);
+            route.data = {
+                users: this.users,
+                roomId: this.roomId,
+                data: data
+            };
+            this.router.navigateByUrl("/" + GAME_PATH);
+        })
+    }
+
+    public onStartGameClick() {
+        this.websocketService.startGame({
+            "room_id": this.roomId
         });
     }
 }
