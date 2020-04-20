@@ -1,20 +1,46 @@
 @import "../../../../style/_variables.scss";
 
-.dialog{
-  position: absolute;
-  z-index: 9;
-  background: #00000080;
+.host{
+  background: $gameBlack;
+  border-radius: 15px;
+
+  .game-host {
+      font-size: 29px;
+      display: block;
+      text-align: left;
+      color: $gameGrey3;
+      width: 100%;
+  }
+
+  .host-name {
+      font-size: 37px;
+      display: block;
+      text-align: left;
+      color: $gameLightGrey;
+  }
+
+  .leave-button{
+      color: $gameRed;
+  }
+
+  .copy-button{
+      color: $gameBlack;
+  }
+
+  .button-4 {
+    font-size: 28px;
+  }
 
   .dialog-form{
-    border-radius: 15px;
-    background: white;
+      border-radius: 15px;
+      background: white;
   };
 
   .name {
-    display: block;
-    text-align: center;
-    font-size: 35px;
-    font-weight: bold;
+      display: block;
+      text-align: center;
+      font-size: 35px;
+      font-weight: bold;
   }
 
 }

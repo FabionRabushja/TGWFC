@@ -7,3 +7,4 @@ export const LOBBY_SELECTOR = 'lobby';
 
 //Components
 export const DIALOG_SELECTOR = 'dialog-selector';
+export const HOST_SELECTOR = 'host-selector';

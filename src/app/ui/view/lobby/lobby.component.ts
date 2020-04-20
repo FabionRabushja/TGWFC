@@ -35,6 +35,7 @@ export class LobbyComponent implements OnInit{
                 }
             }
         );
+
         this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) => {
             logData(data);
             data["lobby_users"].forEach((user) => {

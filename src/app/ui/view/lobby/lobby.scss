@@ -9,18 +9,22 @@
 
   .name{
     text-align: left;
-    font-size: 50px !important;
+    font-size: 43px !important;
     font-weight: bold;
-  }
-
-  .button-2{
-    box-shadow: none;
   }
 
   .clicked, .nothing-selected{
     background: $gameDarkGrey;
     color: $gameLightGrey;
     box-shadow: 3px 3px 4px #00000066;
+  }
+
+  .button-3{
+    box-shadow: none;
+  }
+
+  .mt-n {
+    margin-top: 25%;
   }
 
   .no-users{

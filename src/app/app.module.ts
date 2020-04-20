@@ -26,6 +26,7 @@ import { LocalStorageRepository } from './datastore/local/localstorage.repositor
 import {LobbyComponent} from './ui/view/lobby';
 import { GuardHelper } from './crossconcern/helpers/generic/guard.helper';
 import {DialogComponent} from './ui/components/dialog/dialog.component';
+import {HostComponent} from './ui/components/host/host.component';
 
 
 // Providers
@@ -58,6 +59,7 @@ export function createTranslateLoader(http: HttpClient) {
       SetupComponent,
       SettingsComponent,
       LobbyComponent,
+      HostComponent,
 
       // Components
       DialogComponent,
