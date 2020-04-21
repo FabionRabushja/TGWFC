@@ -22,5 +22,5 @@ export const VIEW_ROUTES: Routes = [
     { path: SETTINGS_PATH, component: SettingsComponent },
     { path: LOBBY_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]},
     { path: LOBBY_LINK_PATH + "/:id", component: LobbyComponent, canActivate: [GuardHelper]},
-    { path: GAME_PATH, component: GameComponent, canActivate: [GuardHelper]},
+    { path: GAME_PATH, component: GameComponent},
 ];

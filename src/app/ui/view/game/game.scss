@@ -1,9 +1,36 @@
 @import "../../../../style/_variables.scss";
 
-.name {
-  display: block;
-  width: 80%;
-  text-align: left;
-  font-size: 2.5rem;
-  font-weight: bold;
+.game{
+  padding-top: 5%;
+
+  span{
+    margin-left: 9.333%;
+    font-size: 35px !important;
+    font-weight: bold;
+  }
+
+  .name{
+    text-align: left;
+    font-size: 43px !important;
+    font-weight: bold;
+  }
+
+  .clicked, .nothing-selected{
+    background: $gameDarkGrey;
+    color: $gameLightGrey;
+    box-shadow: 3px 3px 4px #00000066;
+  }
+
+  .button-3{
+    box-shadow: none;
+  }
+
+  .mt-n {
+    margin-top: 25%;
+  }
+
+  .no-users {
+    color: $gameDarkGrey;
+    font-size: 33px !important;
+  }
 }

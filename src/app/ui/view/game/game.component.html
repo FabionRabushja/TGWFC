@@ -1,17 +1,19 @@
 <div class="container-fluid h-100">
-    <div class="row h-100 lobby">
-        <div class="col-xl-4 col-lg-5 offset-1">
-            <div class="mt-5">
-                <span class="d-block">Participants</span>
+    <div class="game">
+        <span>{{"Choose your completion"}}</span>
+        <div class="row">
+            <div class="col-xl-3 p-4 offset-xl-1">
                 <div class="overflow-auto px-1 scroll text-center">
-                    <div *ngFor="let user of users" class="button-2 w-100 p-2 pl-3 text-left mt-4">
-                        <span>{{ user.username }}</span>
+                    <card-selector [card]="cardToShow" [yourCard]="false"></card-selector>
+                </div>
+            </div>
+            <div class="col-xl-6 offset-xl-1 my-auto">
+                <div class="row">
+                    <div class="col-xl-6 p-4" *ngFor="let card of cards">
+                        <card-selector [card]="card" [yourCard]="true"></card-selector>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-4 offset-xl-2 offset-lg-1 my-auto">
-
         </div>
     </div>
 </div>

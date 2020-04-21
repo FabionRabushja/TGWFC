@@ -1,0 +1,32 @@
+@import "../../../../style/_variables.scss";
+
+.game-card{
+  border-radius: 15px;
+  height: 190px;
+  position: relative;
+
+  .select-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      color: $gameBlack;
+      border-color: $gameBlack;
+      background: transparent;
+      font-size: 20px;
+  }
+}
+
+.host-card {
+  font-size: 27px;
+  background: $gameBlack;
+  color: $gameLightGrey;
+  text-align: left;
+  box-shadow: 3px 3px 4px #00000066;
+}
+
+.your-card {
+  font-size: 27px;
+  background: $gameLightGrey;
+  color: $gameBlack;
+  box-shadow: 3px 3px 4px #00000066;
+}

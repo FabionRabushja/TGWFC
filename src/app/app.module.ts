@@ -28,6 +28,7 @@ import { GuardHelper } from './crossconcern/helpers/generic/guard.helper';
 import {DialogComponent} from './ui/components/dialog/dialog.component';
 import {HostComponent} from './ui/components/host/host.component';
 import {GameComponent} from './ui/view/game';
+import {CardComponent} from './ui/components/card/card.component';
 
 
 // Providers
@@ -65,6 +66,7 @@ export function createTranslateLoader(http: HttpClient) {
       // Components
       DialogComponent,
       HostComponent,
+      CardComponent,
   ],
   imports: [
     NgbModule,

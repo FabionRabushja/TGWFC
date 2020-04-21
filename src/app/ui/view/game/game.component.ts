@@ -15,6 +15,8 @@ export class GameComponent implements OnInit{
 
     public users: UserModel[];
     public roomId: string;
+    public cards: string[] = [];
+    public cardToShow: string;
 
     constructor(protected router: Router,
                 protected activeRoute: ActivatedRoute,
@@ -31,7 +33,11 @@ export class GameComponent implements OnInit{
                 logData(params);
             }
         );
-
+        for (let i=0 ; i<6 ; i++) {
+            this.cards.push("Cardsa asdauihsda uahdisahisudhi" + i.toString());
+        }
+        this.cardToShow = "Cardsajdnma lkkakjsdaoooaoaoooa jasnd";
+/*
         const self = this;
         window.onbeforeunload = function() {
             self.websocketService.disconnect()
@@ -40,7 +46,7 @@ export class GameComponent implements OnInit{
         window.onpopstate = function(event) {
             logData("tre");
             self.websocketService.disconnect();
-        };
+        };*/
 
         this.websocketService.setupListenerOnUserDisconnected().subscribe((data) => {
             const user = new UserModel(data["user_left"]);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HOME_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
-import { LOBBY_PATH, SETTINGS_PATH, SETUP_PATH, SHARE_PATH, LOBBY_LINK_PATH } from '../../../crossconcern/utilities/properties/path.property';
+import { SETTINGS_PATH, SETUP_PATH, SHARE_PATH, LOBBY_LINK_PATH } from '../../../crossconcern/utilities/properties/path.property';
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
 
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit{
     }
 
     public checkUsername(): boolean{
-        return this.localStorageRepository.getUsername() !== null && typeof this.localStorageRepository.getUsername() !== "undefined";
+        return this.localStorageRepository.getUsername() !== null && typeof this.localStorageRepository.getUsername() !== undefined;
     }
 
     public setUsername(event) {

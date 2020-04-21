@@ -1,9 +1,10 @@
 <div class="container-fluid h-100 my-auto dialog">
-    <div class="row h-100 d-flex justify-content-center" id="outside" (click)="outsideClick($event)">
+    <div class="row h-100 d-flex justify-content-center" id="outside" (click)="onOutsideClick($event)">
         <div class="col-4 p-3 dialog-form my-auto text-center">
             <span class="name d-block">{{label}}</span>
             <input [(ngModel)]="value" class="button-4 mt-5 p-3 w-100">
-            <button class="mt-5 p-3 w-100 button-2" (click)="onConfirmClick()">{{"Continue"}}</button>
+            <button *ngIf="value !== '' && value !== undefined" class="mt-5 p-3 w-100 button-2" (click)="onConfirmClick()">{{"Continue"}}</button>
+            <button *ngIf="value === '' || value === undefined" class="mt-5 p-3 w-100 button-3" disabled (click)="onConfirmClick()">{{"Continue"}}</button>
         </div>
     </div>
 </div>

@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Router } from '@angular/router';
 import {DIALOG_SELECTOR} from '../../../crossconcern/utilities/properties/selector.property';
 import {LocalStorageRepositoryInterface} from '../../../datastore/local/localstorage.interface';
-import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
 
 @Component({
     selector: DIALOG_SELECTOR,
@@ -28,7 +27,7 @@ export class DialogComponent {
             this.onConfirm.emit(this.value);
         }
     }
-    public outsideClick(event) {
+    public onOutsideClick(event) {
         if (event.target.id === "outside"){
             this.onFocusOut.emit();
         }

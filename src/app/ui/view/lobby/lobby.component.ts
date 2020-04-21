@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LOBBY_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
 import { UserModel } from '../../../datastore/models/user.model';
-import {GAME_PATH, LOBBY_LINK_PATH, LOBBY_PATH} from '../../../crossconcern/utilities/properties/path.property';
+import { GAME_PATH, LOBBY_LINK_PATH, LOBBY_PATH } from '../../../crossconcern/utilities/properties/path.property';
+import { LOBBY_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
 import {LocalStorageRepositoryInterface} from '../../../datastore/local/localstorage.interface';
 import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
 
@@ -48,7 +48,9 @@ export class LobbyComponent implements OnInit{
         };
 
         this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) => {
+            this.users = [];
             data["lobby_users"].forEach((user) => {
+                logData(user);
                 const userModel = new UserModel(user);
                 if (!userModel.host) {
                     this.users.push(user);
