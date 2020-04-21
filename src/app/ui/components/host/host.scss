@@ -31,6 +31,12 @@
     font-size: 28px;
   }
 
+  .button-4:focus{
+    outline: none !important;
+    box-shadow: none;
+    background: $gameGrey;
+  }
+
   .dialog-form{
       border-radius: 15px;
       background: white;
