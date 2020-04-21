@@ -1,16 +1,20 @@
 <div class="container-fluid h-100">
     <div class="game">
         <span>{{"Choose your completion"}}</span>
-        <div class="row">
-            <div class="col-xl-3 p-4 offset-xl-1">
-                <div class="overflow-auto px-1 scroll text-center">
-                    <card-selector [card]="cardToShow" [yourCard]="false"></card-selector>
-                </div>
+        <div class="row pt-3">
+            <div class="col-xl-3 py-3 px-4 offset-xl-1">
+                <card-selector [card]="cardToShow"
+                               [yourCard]="false">
+                </card-selector>
             </div>
             <div class="col-xl-6 offset-xl-1 my-auto">
                 <div class="row">
-                    <div class="col-xl-6 p-4" *ngFor="let card of cards">
-                        <card-selector [card]="card" [yourCard]="true"></card-selector>
+                    <div class="col-xl-6 px-4 py-3" *ngFor="let card of cards">
+                        <card-selector [card]="card"
+                                       [yourCard]="true"
+                                       [cardSelected]="cardSelected"
+                                       (onSelectCard)="onSelectCardClick($event)">
+                        </card-selector>
                     </div>
                 </div>
             </div>

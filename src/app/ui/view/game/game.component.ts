@@ -17,10 +17,10 @@ export class GameComponent implements OnInit{
     public roomId: string;
     public cards: string[] = [];
     public cardToShow: string;
+    public cardSelected: boolean = false;
 
     constructor(protected router: Router,
                 protected activeRoute: ActivatedRoute,
-                protected localStorageRepository: LocalStorageRepositoryInterface,
                 protected websocketService: WebsocketService) {
         this.users = [];
     }
@@ -34,7 +34,7 @@ export class GameComponent implements OnInit{
             }
         );
         for (let i=0 ; i<6 ; i++) {
-            this.cards.push("Cardsa asdauihsda uahdisahisudhi" + i.toString());
+            this.cards.push("Cards asdasd sdss asdasda" + i.toString());
         }
         this.cardToShow = "Cardsajdnma lkkakjsdaoooaoaoooa jasnd";
 /*
@@ -52,5 +52,10 @@ export class GameComponent implements OnInit{
             const user = new UserModel(data["user_left"]);
             this.users = this.users.filter((item) => item === user);
         });
+    }
+
+    public onSelectCardClick(card: string) {
+        logData(card);
+        this.cardSelected = true;
     }
 }

@@ -14,7 +14,8 @@ export class CardComponent {
 
     @Input() public card: string;
     @Input() public yourCard: boolean;
-    public cardSelected: boolean = false;
+    @Input() public cardSelected: boolean = false;
+    public selected: boolean = false;
 
     @Output() public onSelectCard: EventEmitter<string> = new EventEmitter();
 
@@ -27,6 +28,6 @@ export class CardComponent {
     public onSelectCardClick()
     {
         this.onSelectCard.emit(this.card);
-        this.cardSelected = true;
+        this.selected = true;
     }
 }
