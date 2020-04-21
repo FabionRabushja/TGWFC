@@ -62,18 +62,10 @@ export class HomeComponent implements OnInit{
 
     public onSharedLinkClick() {
         if (this.checkUsername()) {
-            this.joinRoom();
             this.router.navigate(["/" + LOBBY_LINK_PATH + "/" + this.sharedLinkId]);
         } else {
             this.showUsernameDialog = true;
         }
-    }
-
-    public joinRoom() {
-        this.websocketService.joinRoom({
-            "username": this.localStorageRepository.getUsername(),
-            "room_id" : this.sharedLinkId.toString()
-        });
     }
 
     public onParticipateClick() {

@@ -1,7 +1,7 @@
 <div class="container-fluid my-auto p-3 game-card" [ngClass]="{'your-card': yourCard, 'host-card' : !yourCard}">
     <div class="row px-3 d-flex">
-        <span>{{card}}</span>
-        <button *ngIf="yourCard" class="mt-4 p-2 px-4 button-4 select-button"
+        <span>{{card.card}}</span>
+        <button *ngIf="yourCard && showSelectButton" class="mt-4 p-2 px-4 button-4 select-button"
                 [ngClass]="{'selected': selected}"
                 [disabled]="cardSelected"
                 (click)="onSelectCardClick()">

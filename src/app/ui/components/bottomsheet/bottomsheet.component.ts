@@ -1,26 +1,23 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { CARD_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
+import { BOTTOM_SHEET_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
-import {CardModel} from '../../../datastore/models/card.model';
 
 @Component({
-    selector: CARD_SELECTOR,
-    templateUrl: './card.component.html',
-    styleUrls: ['./card.scss'],
+    selector: BOTTOM_SHEET_SELECTOR,
+    templateUrl: './bottomsheet.component.html',
+    styleUrls: ['./bottomsheet.scss'],
 })
-export class CardComponent {
+export class BottomSheetComponent {
     public username: string;
 
-    @Input() public card: CardModel;
+    @Input() public card: string;
     @Input() public yourCard: boolean;
     @Input() public cardSelected: boolean = false;
-    @Input() public showSelectButton: boolean = true;
-
     public selected: boolean = false;
 
-    @Output() public onSelectCard: EventEmitter<CardModel> = new EventEmitter();
+    @Output() public onSelectCard: EventEmitter<string> = new EventEmitter();
 
     constructor(protected router: Router,
                 protected websocketService: WebsocketService,

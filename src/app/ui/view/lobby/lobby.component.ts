@@ -78,7 +78,18 @@ export class LobbyComponent implements OnInit{
                 data: data
             };
             this.router.navigateByUrl("/" + GAME_PATH);
-        })
+        });
+
+        if (this.sharedLinkUser) {
+            this.joinRoom();
+        }
+    }
+
+    public joinRoom() {
+        this.websocketService.joinRoom({
+            "username": this.localStorageRepository.getUsername(),
+            "room_id" : this.roomId
+        });
     }
 
     public onStartGameClick() {

@@ -7,7 +7,7 @@ export class UserModel {
 
     constructor(value: JSON) {
         this.host = value["host"];
-        this.uuid = value["userId"];
+        this.uuid = value["id"];
         this.username = value["username"];
         this.points = value["points"];
         for (const card of value["cards"]){

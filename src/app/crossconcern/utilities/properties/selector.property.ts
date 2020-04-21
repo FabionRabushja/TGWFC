@@ -10,3 +10,4 @@ export const LOBBY_SELECTOR = 'lobby';
 export const DIALOG_SELECTOR = 'dialog-selector';
 export const HOST_SELECTOR = 'host-selector';
 export const CARD_SELECTOR = 'card-selector';
+export const BOTTOM_SHEET_SELECTOR = 'bottom-sheet-selector';
