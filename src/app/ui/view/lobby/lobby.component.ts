@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
 import { UserModel } from '../../../datastore/models/user.model';
-import { GAME_PATH, LOBBY_LINK_PATH, LOBBY_PATH } from '../../../crossconcern/utilities/properties/path.property';
+import {GAME_PATH, HOME_PATH, LOBBY_LINK_PATH, LOBBY_PATH} from '../../../crossconcern/utilities/properties/path.property';
 import { LOBBY_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
 import {LocalStorageRepositoryInterface} from '../../../datastore/local/localstorage.interface';
 import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
@@ -34,9 +34,10 @@ export class LobbyComponent implements OnInit{
                 this.roomId = params["id"];
                 if (url === LOBBY_PATH)
                 {
-                    this.host = new UserModel({
+                    const hostUser = new UserModel({
                         "username": this.localStorageRepository.getUsername()
                     });
+                    this.host = hostUser;
 
                 } else if (url === LOBBY_LINK_PATH)
                 {
@@ -49,11 +50,13 @@ export class LobbyComponent implements OnInit{
         window.onbeforeunload = function()
         {
             self.websocketService.disconnect();
+            self.router.navigate(["/" + HOME_PATH]);
         };
 
         window.onpopstate = function(event)
         {
             self.websocketService.disconnect();
+            self.router.navigate(["/" + HOME_PATH]);
         };
 
         this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) =>
@@ -79,7 +82,7 @@ export class LobbyComponent implements OnInit{
         this.websocketService.setupListenerOnUserDisconnected().subscribe((data) =>
         {
             const user = new UserModel(data["user_left"]);
-            this.users = this.users.filter((item) => item === user);
+            this.users = this.users.filter((item) => item.uuid !== user.uuid);
         });
 
         this.websocketService.setupListenerOnStartGameReply().subscribe((data) =>

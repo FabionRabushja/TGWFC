@@ -1,9 +1,25 @@
+<div *ngIf="showRoundWinner">
+    <alert-selector [user]="roundWinner"
+                     [round]="true"
+                     [game]="false"
+                     [iAmWinner]="iAmWinner"
+                     [showButton]="false">
+    </alert-selector>
+</div>
+<div *ngIf="showGameWinner">
+    <alert-selector [user]="roundWinner"
+                     [round]="false"
+                     [game]="true"
+                     [iAmWinner]="iAmWinner"
+                     [showButton]="true">
+    </alert-selector>
+</div>
 <div class="container-fluid h-100 position-relative">
     <div class="game h-100">
         <span *ngIf="!iAmChooser && !cardSelected">{{"Choose your completion"}}</span>
         <span *ngIf="iAmChooser && !allUsersChose">{{"Waiting for the players to choose..."}}</span>
         <span *ngIf="iAmChooser && allUsersChose">{{"Choose the best completion"}}</span>
-        <span *ngIf="cardSelected">{{"Waiting for the host to choose..."}}</span>
+        <span *ngIf="!iAmChooser && cardSelected">{{"Waiting for the host to choose..."}}</span>
         <div class="row mt-4">
             <div class="col-xl-3 py-3 px-4 offset-xl-1">
                 <card-selector

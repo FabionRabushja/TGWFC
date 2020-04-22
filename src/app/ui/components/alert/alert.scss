@@ -1,0 +1,30 @@
+@import "../../../../style/_variables.scss";
+
+.alerter{
+  position: absolute;
+  z-index: 9;
+  background: #F2F2F2FA;
+
+  .button-3{
+    box-shadow: none;
+  }
+
+  span {
+    color: $gameBlack;
+  }
+
+  .name {
+    display: block;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  .label {
+    display: block;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+}

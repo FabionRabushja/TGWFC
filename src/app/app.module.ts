@@ -31,6 +31,7 @@ import {GameComponent} from './ui/view/game';
 import {CardComponent} from './ui/components/card/card.component';
 import {BottomSheetComponent} from './ui/components/bottomsheet/bottomsheet.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AlertComponent} from './ui/components/alert/alert.component';
 
 
 // Providers
@@ -70,6 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
       HostComponent,
       CardComponent,
       BottomSheetComponent,
+      AlertComponent,
   ],
   imports: [
     NgbModule,

@@ -7,6 +7,8 @@ import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
 import {UserModel} from '../../../datastore/models/user.model';
 import {CardModel} from '../../../datastore/models/card.model';
 import {trigger, transition, style, animate, state} from '@angular/animations';
+import {HOME_PATH} from '../../../crossconcern/utilities/properties/path.property';
+import {timeout} from 'rxjs/operators';
 
 @Component({
     selector: GAME_SELECTOR,
@@ -34,9 +36,16 @@ export class GameComponent implements OnInit{
     public showSelectButton: boolean = true;
     public allUsersChose: boolean = false;
     public bottomSheetToggle: boolean = false;
+    public gameFinished: boolean = false;
+    public roundWinner: UserModel;
+    public gameWinner: UserModel;
+    public showRoundWinner: boolean = false;
+    public showGameWinner: boolean = false;
+    public iAmWinner: boolean = false;
 
     constructor(protected router: Router,
                 protected activeRoute: ActivatedRoute,
+                protected localStorage: LocalStorageRepositoryInterface,
                 protected websocketService: WebsocketService) {
         this.users = [];
     }
@@ -79,6 +88,10 @@ export class GameComponent implements OnInit{
             if(data["user_left"]) {
                 const user = new UserModel(data["user_left"]);
                 this.users = this.users.filter((item) => item === user);
+                if (this.users.length === 1) {
+                    this.websocketService.disconnect();
+                    this.router.navigate(["/" + HOME_PATH]);
+                }
             }
         });
 
@@ -97,6 +110,7 @@ export class GameComponent implements OnInit{
 
         this.websocketService.setupListenerOnChosenCardReply().subscribe((data) =>
         {
+            logData(data);
             if (data["chosen_cards"])
             {
                 if (data["chosen_cards"].length === this.users.length - 1)
@@ -120,10 +134,11 @@ export class GameComponent implements OnInit{
                             "userId": "",
                             "card" : ""
                         });
-                        data["chosen_cards"].forEach((card) => {
+                        this.cards = data["chosen_cards"].map(card => emptyCard);
+                        /*data["chosen_cards"].forEach((card) => {
                             this.cards.push(emptyCard);
-                            this.showSelectButton = false;
-                        });
+                        });*/
+                        this.showSelectButton = false;
                     }
                 }
             }
@@ -131,7 +146,53 @@ export class GameComponent implements OnInit{
 
         this.websocketService.setupListenerOnSelectedWinnerReply().subscribe((data) =>
         {
+            logData("SelectWinnerReply");
             logData(data);
+
+            this.gameFinished = data["game_finished"];
+            if (!this.gameFinished) {
+
+                this.roundWinner = new UserModel(data["round_winner"]);
+                const winnerIndex = this.users.findIndex((user) => user.uuid === this.roundWinner.uuid);
+                this.users[winnerIndex] = {...this.roundWinner};
+                if (this.roundWinner.username === this.localStorage.getUsername()) {
+                    this.iAmWinner = true;
+                }
+                this.showRoundWinner = true;
+
+                this.cardToShow = new CardModel( {
+                    "userId": null,
+                    "card": data["card_to_show"]
+                });
+                this.chooser = new UserModel(data["chooser"]);
+                this.iAmChooser = data["i_am_chooser"];
+                if (!this.iAmChooser) {
+                    this.cards = data["cards"].map(card => new CardModel(card));
+                } else {
+                    this.cards = [];
+                }
+                this.round = data["round"];
+                this.allUsersChose = false;
+                this.cardSelected = false;
+                this.showSelectButton = true;
+                setTimeout(() => {
+                    this.showRoundWinner = false;
+                    this.iAmWinner = false;
+                }, 1500);
+            } else {
+                this.finishGame();
+            }
+        });
+
+        this.websocketService.setupListenerOnFinishGameReply().subscribe((data) => {
+            this.gameWinner = new UserModel(data["winner"]);
+            this.showGameWinner = true;
+        });
+    }
+
+    public finishGame() {
+        this.websocketService.finishGame({
+            "room_id" : this.roomId
         });
     }
 
