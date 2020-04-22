@@ -1,7 +1,7 @@
-<div class="container-fluid my-auto host p-3">
+<div class="container-fluid my-auto host p-3" *ngIf="host">
     <div class="row px-3 d-flex">
         <span class="game-host">{{"Game host:"}}</span>
-        <span class="host-name">{{host}}</span>
+        <span class="host-name">{{host.username}}</span>
         <button class="mt-4 p-3 w-100 button-4 copy-button" (click)="onCopyMatchLinkClick($event)">{{"Copy link to this match"}}</button>
         <button class="mt-4 p-3 w-100 button-4 leave-button" (click)="onLeaveMatchClick()">{{"Leave the match"}}</button>
     </div>

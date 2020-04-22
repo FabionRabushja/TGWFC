@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { HOST_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
 import {WebsocketService} from '../../../crossconcern/webscoket/websocket.services';
-import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
+import {UserModel} from '../../../datastore/models/user.model';
+import {HOME_PATH} from '../../../crossconcern/utilities/properties/path.property';
 
 @Component({
     selector: HOST_SELECTOR,
@@ -13,7 +14,7 @@ import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
 export class HostComponent {
     public username: string;
 
-    @Input() public host: string;
+    @Input() public host: UserModel;
     @Input() public roomId: string;
 
     constructor(protected router: Router,
@@ -26,6 +27,8 @@ export class HostComponent {
         this.websocketService.leaveRoom({
             "room_id": this.roomId
         });
+        this.websocketService.disconnect();
+        this.router.navigate(["/" + HOME_PATH]);
     }
 
     public onCopyMatchLinkClick(event) {

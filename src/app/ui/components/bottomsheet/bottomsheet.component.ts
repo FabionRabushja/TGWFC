@@ -4,6 +4,7 @@ import { BOTTOM_SHEET_SELECTOR } from '../../../crossconcern/utilities/propertie
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
 import {UserModel} from '../../../datastore/models/user.model';
+import {HOME_PATH} from '../../../crossconcern/utilities/properties/path.property';
 
 @Component({
     selector: BOTTOM_SHEET_SELECTOR,
@@ -16,6 +17,7 @@ export class BottomSheetComponent {
     @Input() public users: UserModel[] = [];
     @Input() public round: number;
     @Input() public chooser: UserModel;
+    @Input() public roomId: number;
 
     @Output() public onSelectCard: EventEmitter<string> = new EventEmitter();
 
@@ -26,6 +28,10 @@ export class BottomSheetComponent {
     }
 
     public onLeaveMatchClick() {
-
+        this.websocketService.leaveRoom({
+            "room_id": this.roomId
+        });
+        this.websocketService.disconnect();
+        this.router.navigate(["/" + HOME_PATH]);
     }
 }

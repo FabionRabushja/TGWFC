@@ -15,7 +15,7 @@ import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
 export class LobbyComponent implements OnInit{
 
     public users: UserModel[];
-    public host: string;
+    public host: UserModel;
     public sharedLinkUser: boolean;
     public roomId: string;
     constructor(protected router: Router,
@@ -25,52 +25,67 @@ export class LobbyComponent implements OnInit{
         this.users = [];
     }
 
-    public ngOnInit(): void {
+    public ngOnInit(): void
+    {
         this.activeRoute.params.subscribe(
-            (params) => {
+            (params) =>
+            {
                 const url = this.activeRoute.snapshot.url[0].path;
                 this.roomId = params["id"];
-                if (url === LOBBY_PATH) {
-                    this.host = this.localStorageRepository.getUsername();
-                } else if (url === LOBBY_LINK_PATH) {
+                if (url === LOBBY_PATH)
+                {
+                    this.host = new UserModel({
+                        "username": this.localStorageRepository.getUsername()
+                    });
+
+                } else if (url === LOBBY_LINK_PATH)
+                {
                     this.sharedLinkUser = true;
                 }
             }
         );
 
         const self = this;
-        window.onbeforeunload = function() {
+        window.onbeforeunload = function()
+        {
             self.websocketService.disconnect();
         };
 
-        window.onpopstate = function(event) {
+        window.onpopstate = function(event)
+        {
             self.websocketService.disconnect();
         };
 
-        this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) => {
-            this.users = [];
-            data["lobby_users"].forEach((user) => {
-                logData(user);
-                const userModel = new UserModel(user);
-                if (!userModel.host) {
-                    this.users.push(user);
-                } else {
-                    this.host = userModel.username;
+        this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) =>
+        {
+            this.users = data["lobby_users"].map((user) => new UserModel(user));
+            this.host = new UserModel(data["room_host"]);
+        });
+
+        this.websocketService.setupListenerOnLeaveRoomReply().subscribe((data) =>
+        {
+            const user = new UserModel(data["user_left"]);
+            this.users = this.users.filter((item) => item.uuid !== user.uuid);
+            if (data["new_host"])
+            {
+                this.host = new UserModel(data["new_host"]);
+                if (this.host.username === this.localStorageRepository.getUsername()) 
+                {
+                    this.sharedLinkUser = !this.sharedLinkUser;
                 }
-            });
+            }
         });
 
-        this.websocketService.setupListenerOnLeaveRoomReply().subscribe((data) =>{
-            logData("LeaveRoom");
-            logData(data);
-        });
-
-        this.websocketService.setupListenerOnUserDisconnected().subscribe((data) => {
+        this.websocketService.setupListenerOnUserDisconnected().subscribe((data) =>
+        {
             const user = new UserModel(data["user_left"]);
             this.users = this.users.filter((item) => item === user);
         });
 
-        this.websocketService.setupListenerOnStartGameReply().subscribe((data) => {
+        this.websocketService.setupListenerOnStartGameReply().subscribe((data) =>
+        {
+            logData("DataStartGameReply");
+            logData(data);
             let route = this.router.config[0].children.find(r => r.path === GAME_PATH);
             route.data = {
                 users: this.users,
@@ -80,19 +95,22 @@ export class LobbyComponent implements OnInit{
             this.router.navigateByUrl("/" + GAME_PATH);
         });
 
-        if (this.sharedLinkUser) {
+        if (this.sharedLinkUser)
+        {
             this.joinRoom();
         }
     }
 
-    public joinRoom() {
+    public joinRoom()
+    {
         this.websocketService.joinRoom({
             "username": this.localStorageRepository.getUsername(),
             "room_id" : this.roomId
         });
     }
 
-    public onStartGameClick() {
+    public onStartGameClick()
+    {
         this.websocketService.startGame({
             "room_id": this.roomId
         });

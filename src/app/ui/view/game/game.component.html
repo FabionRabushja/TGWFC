@@ -29,11 +29,14 @@
             </div>
         </div>
     </div>
-    <div class="bottom-sheet px-3 pt-2" (click)="bottomSheetToggle = !bottomSheetToggle" [@expandableState]="bottomSheetToggle">
-        <bottom-sheet-selector
-                [round]="round"
-                [users]="users"
-                [chooser]="chooser">
-        </bottom-sheet-selector>
+    <div class="bottom-sheet px-3 pt-2"
+         (click)="bottomSheetToggle = !bottomSheetToggle"
+         [@expandableState]="bottomSheetToggle">
+            <bottom-sheet-selector
+                    [round]="round"
+                    [roomId]="roomId"
+                    [users]="users"
+                    [chooser]="chooser">
+            </bottom-sheet-selector>
     </div>
 </div>
