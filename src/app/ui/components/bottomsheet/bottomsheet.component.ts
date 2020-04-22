@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BOTTOM_SHEET_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
+import {UserModel} from '../../../datastore/models/user.model';
 
 @Component({
     selector: BOTTOM_SHEET_SELECTOR,
@@ -12,10 +13,9 @@ import { WebsocketService } from '../../../crossconcern/webscoket/websocket.serv
 export class BottomSheetComponent {
     public username: string;
 
-    @Input() public card: string;
-    @Input() public yourCard: boolean;
-    @Input() public cardSelected: boolean = false;
-    public selected: boolean = false;
+    @Input() public users: UserModel[] = [];
+    @Input() public round: number;
+    @Input() public chooser: UserModel;
 
     @Output() public onSelectCard: EventEmitter<string> = new EventEmitter();
 
@@ -25,9 +25,7 @@ export class BottomSheetComponent {
         this.username = localStorage.getUsername();
     }
 
-    public onSelectCardClick()
-    {
-        this.onSelectCard.emit(this.card);
-        this.selected = true;
+    public onLeaveMatchClick() {
+
     }
 }

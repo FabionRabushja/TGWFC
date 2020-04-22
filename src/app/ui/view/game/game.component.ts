@@ -6,11 +6,19 @@ import { LocalStorageRepositoryInterface } from '../../../datastore/local/locals
 import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
 import {UserModel} from '../../../datastore/models/user.model';
 import {CardModel} from '../../../datastore/models/card.model';
+import {trigger, transition, style, animate, state} from '@angular/animations';
 
 @Component({
     selector: GAME_SELECTOR,
     templateUrl: './game.component.html',
     styleUrls: ['./game.scss'],
+    animations: [
+        trigger('expandableState', [
+            state('true', style({ bottom: '0' })),
+            state('false', style({ bottom: '-300px' })),
+            transition('false <=> true', animate(500))
+        ])
+    ],
 })
 export class GameComponent implements OnInit{
 
@@ -24,6 +32,8 @@ export class GameComponent implements OnInit{
     public chooser: UserModel;
     public round: number;
     public showSelectButton: boolean = true;
+    public allUsersChose: boolean = false;
+    public bottomSheetToggle: boolean = false;
 
     constructor(protected router: Router,
                 protected activeRoute: ActivatedRoute,
@@ -33,7 +43,8 @@ export class GameComponent implements OnInit{
 
     public ngOnInit(): void {
         this.activeRoute.data.subscribe(
-            (params) => {
+            (params) =>
+            {
                 this.users = params["users"];
                 this.roomId = params["roomId"];
                 this.iAmChooser = params["data"]["i_am_chooser"];
@@ -52,7 +63,44 @@ export class GameComponent implements OnInit{
                 }
             }
         );
-
+/*
+        this.users = [];
+        this.users.push(new UserModel({
+            "id" : "111",
+            "username": "sadasd",
+            "points": 5
+        }));
+        this.users.push(new UserModel({
+            "id" : "111",
+            "username": "sadasd",
+            "points": 5
+        }));
+        this.users.push(new UserModel({
+            "id" : "111",
+            "username": "sadasd",
+            "points": 5
+        }));
+        this.users.push(new UserModel({
+            "id" : "111",
+            "username": "sadasd",
+            "points": 5
+        }));
+        this.users.push(new UserModel({
+            "id" : "111",
+            "username": "sadasd",
+            "points": 5
+        }));
+        this.users.push(new UserModel({
+            "id" : "111",
+            "username": "sadasd",
+            "points": 5
+        }));
+        this.chooser = new UserModel({
+            "id" : "111",
+            "username": "sadasd",
+            "points": 5
+        });
+        this.round = 4;*/
         const self = this;
         window.onbeforeunload = function() {
             self.websocketService.disconnect()
@@ -84,6 +132,7 @@ export class GameComponent implements OnInit{
             if (data["chosen_cards"]) {
                 if (data["chosen_cards"].length === this.users.length){
                     this.cards = [];
+                    this.allUsersChose = true;
                     data["chosen_cards"].forEach((card) => {
                         this.cards.push(new CardModel(
                             {

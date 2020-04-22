@@ -1,3 +1,34 @@
-<div class="bg-dark h-100">
-
+<div class="bottom-sheet container-fluid h-100">
+    <div class="text-center">
+        <img src="assets/image/bar.png">
+    </div>
+    <div class="row align-content-start pt-1 px-3">
+        <span>{{"Round: "}}</span>
+        <span class="ml-2 white">{{round}}</span>
+    </div>
+    <div class="row align-content-start px-3">
+        <span>{{"Card Czar: "}}</span>
+        <span class="ml-2 white">{{chooser.username}}</span>
+    </div>
+    <div class="row align-content-start pt-2 px-3">
+        <span>{{"Leaderboard: "}}</span>
+        <div class="user-scroll w-100">
+            <div *ngFor="let user of users"
+                 class="btn-toolbar w-100 justify-content-between user position-relative">
+                <div class="group" role="group">
+                    <div class="py-1 pl-1">
+                        <span>{{ user.username }}</span>
+                    </div>
+                </div>
+                <div class="group" role="group">
+                    <div class="py-1 pr-2">
+                        <span>{{ user.points }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row px-4">
+        <button class="mt-2 p-1 w-100 button-4 leave-button" (click)="onLeaveMatchClick()">{{"Leave the match"}}</button>
+    </div>
 </div>

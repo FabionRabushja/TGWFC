@@ -30,6 +30,7 @@ import {HostComponent} from './ui/components/host/host.component';
 import {GameComponent} from './ui/view/game';
 import {CardComponent} from './ui/components/card/card.component';
 import {BottomSheetComponent} from './ui/components/bottomsheet/bottomsheet.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 // Providers
@@ -74,6 +75,7 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule,
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules

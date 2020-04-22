@@ -5,14 +5,15 @@ export class UserModel {
     public points: string;
     public cards: string[] = [];
 
-    constructor(value: JSON) {
+    constructor(value: any) {
         this.host = value["host"];
         this.uuid = value["id"];
         this.username = value["username"];
         this.points = value["points"];
-        for (const card of value["cards"]){
-            this.cards.push(card);
+        if (value["cards"]) {
+            for (const card of value["cards"]){
+                this.cards.push(card);
+            }
         }
     }
-
 }

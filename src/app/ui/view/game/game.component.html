@@ -1,8 +1,11 @@
-<div class="container-fluid h-100">
-    <div class="game h-100 position-relative">
-        <span>{{"Choose your completion"}}</span>
-        <div class="row">
-            <div class="col-xl-3 py-3 px-4 offset-xl-1 position-relative">
+<div class="container-fluid h-100 position-relative">
+    <div class="game h-100">
+        <span *ngIf="!iAmChooser && !cardSelected">{{"Choose your completion"}}</span>
+        <span *ngIf="iAmChooser && !allUsersChose">{{"Waiting for the players to choose..."}}</span>
+        <span *ngIf="iAmChooser && allUsersChose">{{"Choose the best completion"}}</span>
+        <span *ngIf="cardSelected">{{"Waiting for the host to choose..."}}</span>
+        <div class="row mt-4">
+            <div class="col-xl-3 py-3 px-4 offset-xl-1">
                 <card-selector
                         [card]="cardToShow"
                         [yourCard]="false">
@@ -25,5 +28,12 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="bottom-sheet px-3 pt-2" (click)="bottomSheetToggle = !bottomSheetToggle" [@expandableState]="bottomSheetToggle">
+        <bottom-sheet-selector
+                [round]="round"
+                [users]="users"
+                [chooser]="chooser">
+        </bottom-sheet-selector>
     </div>
 </div>
