@@ -1,5 +1,5 @@
 {
-  "name": "angular-starter-kit",
+  "name": "tgwfc",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -57,12 +57,12 @@
   "main": "karma.conf.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FabionRabushja/angular-starter-kit.git"
+    "url": "git+https://github.com/FabionRabushja/tgwfc.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/FabionRabushja/angular-starter-kit/issues"
+    "url": "https://github.com/FabionRabushja/tgwfc/issues"
   },
-  "homepage": "https://github.com/FabionRabushja/angular-starter-kit#readme"
+  "homepage": "https://github.com/FabionRabushja/tgwfc#readme"
 }
