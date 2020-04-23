@@ -13,6 +13,7 @@
                     </div>
                     <div *ngFor="let user of users" class="button-2 w-100 p-2 pl-3 text-left mt-4">
                         <span>{{ user.username }}</span>
+                        <span *ngIf="!sharedLinkUser && host.uuid !== user.uuid" class="close" (click)="kickUser(user)">X</span>
                     </div>
                 </div>
             </div>

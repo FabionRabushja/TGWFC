@@ -37,6 +37,7 @@ export class LobbyComponent implements OnInit{
                     const hostUser = new UserModel({
                         "username": this.localStorageRepository.getUsername()
                     });
+                    this.users.push(hostUser);
                     this.host = hostUser;
 
                 } else if (url === LOBBY_LINK_PATH)
@@ -79,6 +80,15 @@ export class LobbyComponent implements OnInit{
             }
         });
 
+        this.websocketService.setupListenerOnKickUserReply().subscribe((data) => {
+            const user = new UserModel(data["user_left"]);
+            if (user.username === this.localStorageRepository.getUsername()) {
+                this.websocketService.disconnect();
+                this.router.navigate(["/" + HOME_PATH]);
+            }
+            this.users = this.users.filter((item) => item.uuid !== user.uuid);
+        });
+
         this.websocketService.setupListenerOnUserDisconnected().subscribe((data) =>
         {
             const user = new UserModel(data["user_left"]);
@@ -115,6 +125,13 @@ export class LobbyComponent implements OnInit{
     public onStartGameClick()
     {
         this.websocketService.startGame({
+            "room_id": this.roomId
+        });
+    }
+
+    public kickUser(user: UserModel) {
+        this.websocketService.kickUser({
+            "user_id": user.uuid,
             "room_id": this.roomId
         });
     }

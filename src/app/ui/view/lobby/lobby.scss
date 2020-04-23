@@ -4,7 +4,7 @@
   padding-top: 5%;
 
   span{
-    font-size: 35px !important;
+    font-size: 35px;
   }
 
   .name{
@@ -17,6 +17,21 @@
     background: $gameDarkGrey;
     color: $gameLightGrey;
     box-shadow: 3px 3px 4px #00000066;
+  }
+
+  .close {
+    float:right;
+    display:inline-block;
+    padding:12px 10px;
+    color: $gameLightGrey;
+    opacity: 1;
+    font-size: 30px;
+    font-weight: 200;
+  }
+
+  .close:hover {
+    opacity: .5;
+    cursor: pointer;
   }
 
   .button-3{

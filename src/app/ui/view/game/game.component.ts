@@ -8,7 +8,6 @@ import {UserModel} from '../../../datastore/models/user.model';
 import {CardModel} from '../../../datastore/models/card.model';
 import {trigger, transition, style, animate, state} from '@angular/animations';
 import {HOME_PATH} from '../../../crossconcern/utilities/properties/path.property';
-import {timeout} from 'rxjs/operators';
 
 @Component({
     selector: GAME_SELECTOR,
@@ -16,9 +15,9 @@ import {timeout} from 'rxjs/operators';
     styleUrls: ['./game.scss'],
     animations: [
         trigger('expandableState', [
-            state('true', style({ bottom: '0' })),
-            state('false', style({ bottom: '-300px' })),
-            transition('false <=> true', animate(500))
+            state("true", style({ bottom: '0' })),
+            state("false", style({ bottom: '-300px' })),
+            transition("false <=> true", animate(500))
         ])
     ],
 })
@@ -28,14 +27,14 @@ export class GameComponent implements OnInit{
     public roomId: string;
     public cards: CardModel[] = [];
     public cardToShow: CardModel;
-    public cardSelected: boolean = false;
+    public cardSelected = false;
     public host: UserModel;
-    public iAmChooser: boolean = false;
+    public iAmChooser: false;
     public chooser: UserModel;
     public round: number;
     public showSelectButton: boolean = true;
     public allUsersChose: boolean = false;
-    public bottomSheetToggle: boolean = false;
+    public bottomSheetToggle : boolean = false;
     public gameFinished: boolean = false;
     public roundWinner: UserModel;
     public gameWinner: UserModel;
