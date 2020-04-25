@@ -3,7 +3,16 @@
         <div class="col-xl-3 my-auto text-center">
             <span class="name d-block">{{"Insert Your Username"}}</span>
             <input [(ngModel)]="username" class="button-4 mt-5 p-3 w-100">
-            <button class="mt-5 p-3 w-100 button-1" (click)="onConfirmClick()">{{"OK"}}</button>
+            <button *ngIf="username !== '' && username !== undefined && username !== null"
+                    class="mt-5 p-3 w-100 button-1"
+                    (click)="onConfirmClick()">
+                {{"Continue"}}
+            </button>
+            <button *ngIf="username === '' || username === undefined || username === null"
+                    class="mt-5 p-3 w-100 button-3"
+                    disabled>
+                {{"Continue"}}
+            </button>
         </div>
     </div>
 </div>

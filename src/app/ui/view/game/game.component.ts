@@ -72,11 +72,13 @@ export class GameComponent implements OnInit{
         );
 
         window.onbeforeunload = () => {
-            this.websocketService.disconnect()
+            this.websocketService.disconnect();
+            this.router.navigate(["/" + HOME_PATH]);
         };
 
         window.onpopstate = () => {
             this.websocketService.disconnect();
+            this.router.navigate(["/" + HOME_PATH]);
         };
 
         this.websocketService.setupListenerOnUserDisconnected().subscribe((data) => {
@@ -165,6 +167,7 @@ export class GameComponent implements OnInit{
                     this.iAmWinner = false;
                 }, 1500);
             } else {
+                logData("here");
                 this.finishGame();
             }
         });

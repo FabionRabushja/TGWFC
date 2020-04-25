@@ -115,17 +115,6 @@ export class WebsocketService {
       });
   }
 
-  public setupListenerO(): Observable<any> {
-      return new Observable(observer => {
-          this.socket.on(CHOSEN_SELECTED_WINNER_REPLY, (data) => {
-              observer.next(data);
-          });
-          return () => {
-              this.socket.disconnect();
-          }
-      });
-  }
-
   public setupListenerOnUserDisconnected(): Observable<any> {
       return new Observable(observer => {
           this.socket.on(USER_DISCONECTED, (data) => {
