@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://tgwfc-prod.herokuapp.com/api/',
-  websocketUrl:"https://tgwfc-prod.herokuapp.com/",
+  baseUrl: 'https://tgwfc-stg.herokuapp.com/api/',
+  websocketUrl: 'https://tgwfc-stg.herokuapp.com/',
   logEnabled: false,
 };
