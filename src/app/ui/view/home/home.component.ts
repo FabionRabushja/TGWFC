@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit{
                 this.showAddLinkDialog = true;
             } else {
                 logData("1");
-                // this.router.navigate(['/' + SETUP_PATH]);
+                this.router.navigate(['/' + SETUP_PATH]);
             }
         }
     }
