@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://cah-back.herokuapp.com/api/',
-  websocketUrl: "https://cah-back.herokuapp.com/",
+  baseUrl: 'https://tgwfc-stg.herokuapp.com/api/',
+  websocketUrl: "https://tgwfc-stg.herokuapp.com/",
   logEnabled: true,
 };
 

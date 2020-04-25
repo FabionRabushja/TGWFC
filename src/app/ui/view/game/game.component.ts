@@ -53,7 +53,7 @@ export class GameComponent implements OnInit{
         this.activeRoute.data.subscribe(
             (params) =>
             {
-                this.users = params["users"];
+                this.users = params.users;
                 this.roomId = params["roomId"];
                 this.iAmChooser = params["data"]["i_am_chooser"];
                 this.cardToShow = new CardModel({
@@ -109,7 +109,6 @@ export class GameComponent implements OnInit{
 
         this.websocketService.setupListenerOnChosenCardReply().subscribe((data) =>
         {
-            logData(data);
             if (data["chosen_cards"])
             {
                 if (data["chosen_cards"].length === this.users.length - 1)
@@ -118,14 +117,17 @@ export class GameComponent implements OnInit{
                     this.allUsersChose = true;
                     data["chosen_cards"].forEach((card) =>
                     {
+                        logData("Chosen Cards");
+                        logData(card);
                         this.cards.push( new CardModel({
                                 "userId": card["userId"],
-                                "card" : card["card"]["card"]
+                                "card" : card["card"]
                             }));
                     });
                     this.showSelectButton = this.iAmChooser;
                 } else
                 {
+                    logData("empty Card");
                     if (this.cardSelected || this.iAmChooser)
                     {
                         this.cards = [];
@@ -207,9 +209,7 @@ export class GameComponent implements OnInit{
         {
             this.websocketService.chosenCard({
                 "room_id": this.roomId,
-                "chosen_card": {
-                    "card": card
-                }
+                "chosen_card": card
             });
             this.cardSelected = true;
         }
