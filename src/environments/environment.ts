@@ -7,6 +7,7 @@ export const environment = {
   baseUrl: 'https://tgwfc-stg.herokuapp.com/api/',
   websocketUrl: "https://tgwfc-stg.herokuapp.com/",
   logEnabled: true,
+
 };
 
 /*
