@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit{
 
     public ngOnInit(): void {
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            this.location.go("tgwfc://--/lobby?roomId=KiEce51vV");
+            document.location.href = 'tgwfc://--/lobby?roomId=KiEce51vV';
         } else {
             this.websocketService.setupSocketConnection();
             this.activeRoute.params.subscribe(
