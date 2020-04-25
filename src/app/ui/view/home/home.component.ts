@@ -26,20 +26,20 @@ export class HomeComponent implements OnInit{
     }
 
     public ngOnInit(): void {
-        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            document.location.href = 'tgwfc://--/lobby?roomId=KiEce51vV';
-        } else {
-            this.websocketService.setupSocketConnection();
-            this.activeRoute.params.subscribe(
-                (params) => {
-                    const url = this.activeRoute.snapshot.url[0].path;
-                    if (url === SHARE_PATH) {
+        this.websocketService.setupSocketConnection();
+        this.activeRoute.params.subscribe(
+            (params) => {
+                const url = this.activeRoute.snapshot.url[0].path;
+                if (url === SHARE_PATH) {
+                    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                        document.location.href = 'tgwfc://--/lobby?roomId=' + params["id"];
+                    } else {
                         this.sharedLinkId = params["id"];
                         this.onSharedLinkClick();
                     }
                 }
-            );
-        }
+            }
+        );
     }
 
     public checkUsername(): boolean {
