@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit{
                 const url = this.activeRoute.snapshot.url[0].path;
                 if (url === SHARE_PATH) {
                     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-                        document.location.href = 'tgwfc://--/lobby?roomId=' + params["id"];
+                        document.location.href = 'tgwfc:///lobby?roomId=' + params["id"];
                     } else {
                         this.sharedLinkId = params["id"];
                         this.onSharedLinkClick();
