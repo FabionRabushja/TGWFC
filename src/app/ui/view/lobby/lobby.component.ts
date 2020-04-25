@@ -47,27 +47,22 @@ export class LobbyComponent implements OnInit{
             }
         );
 
-        const self = this;
-        window.onbeforeunload = function()
-        {
-            self.websocketService.disconnect();
-            self.router.navigate(["/" + HOME_PATH]);
+        window.onbeforeunload =() => {
+            this.websocketService.disconnect();
+            this.router.navigate(["/" + HOME_PATH]);
         };
 
-        window.onpopstate = function(event)
-        {
-            self.websocketService.disconnect();
-            self.router.navigate(["/" + HOME_PATH]);
+        window.onpopstate = () => {
+            this.websocketService.disconnect();
+            this.router.navigate(["/" + HOME_PATH]);
         };
 
-        this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) =>
-        {
+        this.websocketService.setupListenerOnJoinRoomReply().subscribe((data) => {
             this.users = data["lobby_users"].map((user) => new UserModel(user));
             this.host = new UserModel(data["room_host"]);
         });
 
-        this.websocketService.setupListenerOnLeaveRoomReply().subscribe((data) =>
-        {
+        this.websocketService.setupListenerOnLeaveRoomReply().subscribe((data) => {
             const user = new UserModel(data["user_left"]);
             this.users = this.users.filter((item) => item.uuid !== user.uuid);
             if (data["new_host"])
@@ -89,14 +84,12 @@ export class LobbyComponent implements OnInit{
             this.users = this.users.filter((item) => item.uuid !== user.uuid);
         });
 
-        this.websocketService.setupListenerOnUserDisconnected().subscribe((data) =>
-        {
+        this.websocketService.setupListenerOnUserDisconnected().subscribe((data) => {
             const user = new UserModel(data["user_left"]);
             this.users = this.users.filter((item) => item.uuid !== user.uuid);
         });
 
-        this.websocketService.setupListenerOnStartGameReply().subscribe((data) =>
-        {
+        this.websocketService.setupListenerOnStartGameReply().subscribe((data) => {
             logData("DataStartGameReply");
             logData(data);
             let route = this.router.config[0].children.find(r => r.path === GAME_PATH);
@@ -108,22 +101,19 @@ export class LobbyComponent implements OnInit{
             this.router.navigateByUrl("/" + GAME_PATH);
         });
 
-        if (this.sharedLinkUser)
-        {
+        if (this.sharedLinkUser) {
             this.joinRoom();
         }
     }
 
-    public joinRoom()
-    {
+    public joinRoom() {
         this.websocketService.joinRoom({
             "username": this.localStorageRepository.getUsername(),
             "room_id" : this.roomId
         });
     }
 
-    public onStartGameClick()
-    {
+    public onStartGameClick() {
         this.websocketService.startGame({
             "room_id": this.roomId
         });

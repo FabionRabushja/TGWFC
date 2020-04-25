@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit{
         );
     }
 
-    public checkUsername(): boolean{
+    public checkUsername(): boolean {
         return this.localStorageRepository.getUsername() !== null && typeof this.localStorageRepository.getUsername() !== undefined;
     }
 
@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit{
     public setLobbyLink(url: string) {
         if (url !== "" && url !== null) {
             this.showAddLinkDialog = false;
-           //this.router.navigate(["/" + LOBBY_PATH + "/" + this.sharedLinkId]);
         }
     }
 

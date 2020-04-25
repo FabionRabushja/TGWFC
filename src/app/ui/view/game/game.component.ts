@@ -51,8 +51,7 @@ export class GameComponent implements OnInit{
 
     public ngOnInit(): void {
         this.activeRoute.data.subscribe(
-            (params) =>
-            {
+            (params) => {
                 this.users = params.users;
                 this.roomId = params["roomId"];
                 this.iAmChooser = params["data"]["i_am_chooser"];
@@ -72,18 +71,15 @@ export class GameComponent implements OnInit{
             }
         );
 
-        const self = this;
-        window.onbeforeunload = function() {
-            self.websocketService.disconnect()
+        window.onbeforeunload = () => {
+            this.websocketService.disconnect()
         };
 
-        window.onpopstate = function(event) {
-            logData("tre");
-            self.websocketService.disconnect();
+        window.onpopstate = () => {
+            this.websocketService.disconnect();
         };
 
-        this.websocketService.setupListenerOnUserDisconnected().subscribe((data) =>
-        {
+        this.websocketService.setupListenerOnUserDisconnected().subscribe((data) => {
             if(data["user_left"]) {
                 const user = new UserModel(data["user_left"]);
                 this.users = this.users.filter((item) => item === user);
@@ -94,25 +90,19 @@ export class GameComponent implements OnInit{
             }
         });
 
-        this.websocketService.setupListenerOnLeaveRoomReply().subscribe((data) =>
-        {
-            if (data["new_host"])
-            {
+        this.websocketService.setupListenerOnLeaveRoomReply().subscribe((data) => {
+            if (data["new_host"]) {
                 this.host = new UserModel(data["new_host"]);
             }
-            if(data["user_left"])
-            {
+            if(data["user_left"]) {
                 const user = new UserModel(data["user_left"]);
                 this.users = this.users.filter((item) => item === user);
             }
         });
 
-        this.websocketService.setupListenerOnChosenCardReply().subscribe((data) =>
-        {
-            if (data["chosen_cards"])
-            {
-                if (data["chosen_cards"].length === this.users.length - 1)
-                {
+        this.websocketService.setupListenerOnChosenCardReply().subscribe((data) => {
+            if (data["chosen_cards"]) {
+                if (data["chosen_cards"].length === this.users.length - 1) {
                     this.cards = [];
                     this.allUsersChose = true;
                     data["chosen_cards"].forEach((card) =>
@@ -125,28 +115,22 @@ export class GameComponent implements OnInit{
                             }));
                     });
                     this.showSelectButton = this.iAmChooser;
-                } else
-                {
+                } else {
                     logData("empty Card");
-                    if (this.cardSelected || this.iAmChooser)
-                    {
+                    if (this.cardSelected || this.iAmChooser) {
                         this.cards = [];
                         const emptyCard = new CardModel({
                             "userId": "",
                             "card" : ""
                         });
-                        this.cards = data["chosen_cards"].map(card => emptyCard);
-                        /*data["chosen_cards"].forEach((card) => {
-                            this.cards.push(emptyCard);
-                        });*/
+                        this.cards = data["chosen_cards"].map(() => emptyCard);
                         this.showSelectButton = false;
                     }
                 }
             }
         });
 
-        this.websocketService.setupListenerOnSelectedWinnerReply().subscribe((data) =>
-        {
+        this.websocketService.setupListenerOnSelectedWinnerReply().subscribe((data) => {
             logData("SelectWinnerReply");
             logData(data);
 
@@ -197,16 +181,13 @@ export class GameComponent implements OnInit{
         });
     }
 
-    public onSelectCardClick(card: CardModel)
-    {
-        if (this.iAmChooser)
-        {
+    public onSelectCardClick(card: CardModel) {
+        if (this.iAmChooser) {
             this.websocketService.chosenSelectedWinner({
                 "room_id": this.roomId,
                 "winner_card": card
             })
-        } else
-        {
+        } else {
             this.websocketService.chosenCard({
                 "room_id": this.roomId,
                 "chosen_card": card

@@ -6,8 +6,7 @@ import { PackModel } from '../../../datastore/models/pack.model';
 import { Location } from "@angular/common";
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
-import { LOBBY_PATH } from '../../../crossconcern/utilities/properties/path.property';
-import {logData} from '../../../crossconcern/helpers/generic/generic.helper';
+import {HOME_PATH, LOBBY_PATH} from "../../../crossconcern/utilities/properties/path.property";
 
 @Component({
     selector: SETUP_SELECTOR,
@@ -40,7 +39,20 @@ export class SetupComponent implements OnInit{
             this.websocketService.setupListenerOnCreateRoom().subscribe((value) => {
                 this.router.navigate(["/" + LOBBY_PATH + "/" + value["room"].id]);
             });
-        })
+        });
+
+        const self = this;
+        window.onbeforeunload = function()
+        {
+            self.websocketService.disconnect();
+            self.router.navigate(["/" + HOME_PATH]);
+        };
+
+        window.onpopstate = function(event)
+        {
+            self.websocketService.disconnect();
+            self.router.navigate(["/" + HOME_PATH]);
+        };
     }
 
     public onPackSelect(pack: PackModel) {
@@ -70,7 +82,8 @@ export class SetupComponent implements OnInit{
     }
 
     public onGoBack() {
-        this.location.back();
+        this.websocketService.disconnect();
+        this.router.navigate(["/" + HOME_PATH]);
     }
 
 }
