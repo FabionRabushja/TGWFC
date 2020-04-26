@@ -4,6 +4,8 @@ import { HOME_SELECTOR } from '../../../crossconcern/utilities/properties/select
 import { SETTINGS_PATH, SETUP_PATH, SHARE_PATH, LOBBY_LINK_PATH } from '../../../crossconcern/utilities/properties/path.property';
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
+import {logData} from "../../../crossconcern/helpers/generic/generic.helper";
+import {Location} from "@angular/common";
 
 @Component({
     selector: HOME_SELECTOR,
@@ -17,6 +19,7 @@ export class HomeComponent implements OnInit{
     public sharedLinkId: string;
     public onParticipate: boolean;
     constructor(protected router: Router,
+                protected location: Location,
                 protected activeRoute: ActivatedRoute,
                 protected localStorageRepository: LocalStorageRepositoryInterface,
                 protected websocketService: WebsocketService) {
@@ -28,14 +31,18 @@ export class HomeComponent implements OnInit{
             (params) => {
                 const url = this.activeRoute.snapshot.url[0].path;
                 if (url === SHARE_PATH) {
-                    this.sharedLinkId = params["id"];
-                    this.onSharedLinkClick();
+                    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                        document.location.href = 'tgwfc:///lobby?roomId=' + params["id"];
+                    } else {
+                        this.sharedLinkId = params["id"];
+                        this.onSharedLinkClick();
+                    }
                 }
             }
         );
     }
 
-    public checkUsername(): boolean{
+    public checkUsername(): boolean {
         return this.localStorageRepository.getUsername() !== null && typeof this.localStorageRepository.getUsername() !== undefined;
     }
 
@@ -48,6 +55,7 @@ export class HomeComponent implements OnInit{
             } else if (this.onParticipate) {
                 this.showAddLinkDialog = true;
             } else {
+                logData("1");
                 this.router.navigate(['/' + SETUP_PATH]);
             }
         }
@@ -56,7 +64,6 @@ export class HomeComponent implements OnInit{
     public setLobbyLink(url: string) {
         if (url !== "" && url !== null) {
             this.showAddLinkDialog = false;
-           //this.router.navigate(["/" + LOBBY_PATH + "/" + this.sharedLinkId]);
         }
     }
 
@@ -80,6 +87,7 @@ export class HomeComponent implements OnInit{
     public onStartGameClick() {
         this.onParticipate = false;
         if (this.checkUsername()) {
+            logData("2");
             this.router.navigate(['/' + SETUP_PATH]);
         } else {
             this.showUsernameDialog = true;

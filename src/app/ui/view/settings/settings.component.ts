@@ -9,7 +9,7 @@ import {HOME_PATH} from '../../../crossconcern/utilities/properties/path.propert
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.scss'],
 })
-export class SettingsComponent {
+export class SettingsComponent{
     public username: string;
 
     constructor(protected router: Router,
