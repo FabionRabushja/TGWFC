@@ -8,23 +8,28 @@
                      (onConfirm)="setLobbyLink($event)"
                      (onFocusOut)="showAddLinkDialog=false"></dialog-selector>
 </div>
-<div class="container-fluid h-100 my-auto">
-    <div class="row h-100 d-flex justify-content-center">
-        <div class="col-xl-4 my-auto">
-            <span class="name">{{"The Game"}}</span>
-            <span class="name">{{"With Funny Cards"}}</span>
-            <button class="mt-5 p-3 w-100 button-1"
-                    (click)="onStartGameClick()">
-                <span>Start a Game</span>
-            </button>
-            <button class="mt-5 p-3 w-100 button-2"
-                    (click)="onParticipateClick()">
-                <span>Participate</span>
-            </button>
-            <button class="mt-5 p-3 w-100 button-3"
-                    (click)="onSettingsClick()">
-                <span>Settings</span>
-            </button>
+<div class="position-relative h-100">
+    <div class="container-fluid h-100 my-auto">
+        <div class="row h-100 d-flex justify-content-center">
+            <div class="col-xl-4 my-auto">
+                <span class="name">{{"The Game"}}</span>
+                <span class="name">{{"With Funny Cards"}}</span>
+                <button class="mt-5 p-3 w-100 button-1"
+                        (click)="onStartGameClick()">
+                    <span>Start a Game</span>
+                </button>
+                <button class="mt-5 p-3 w-100 button-2"
+                        (click)="onParticipateClick()">
+                    <span>Participate</span>
+                </button>
+                <button class="mt-5 p-3 w-100 button-3"
+                        (click)="onSettingsClick()">
+                    <span>Settings</span>
+                </button>
+            </div>
         </div>
+    </div>
+    <div class="foot container-fluid d-flex align-items-center justify-content-center">
+        <a (click)="onPrivacyPolicyClick()">Privacy Notice</a>
     </div>
 </div>

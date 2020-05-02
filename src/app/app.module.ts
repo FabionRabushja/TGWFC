@@ -32,6 +32,7 @@ import {CardComponent} from './ui/components/card/card.component';
 import {BottomSheetComponent} from './ui/components/bottomsheet/bottomsheet.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AlertComponent} from './ui/components/alert/alert.component';
+import {PolicyPrivacyComponent} from "./ui/view/policyprivacy/policyprivacy.component";
 
 
 // Providers
@@ -65,6 +66,7 @@ export function createTranslateLoader(http: HttpClient) {
       SettingsComponent,
       LobbyComponent,
       GameComponent,
+      PolicyPrivacyComponent,
 
       // Components
       DialogComponent,

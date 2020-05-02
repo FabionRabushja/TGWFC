@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HOME_SELECTOR } from '../../../crossconcern/utilities/properties/selector.property';
-import { SETTINGS_PATH, SETUP_PATH, SHARE_PATH, LOBBY_LINK_PATH } from '../../../crossconcern/utilities/properties/path.property';
+import {
+    SETTINGS_PATH,
+    SETUP_PATH,
+    SHARE_PATH,
+    LOBBY_LINK_PATH,
+    POLICY_PRIVACY_PATH
+} from "../../../crossconcern/utilities/properties/path.property";
 import { WebsocketService } from '../../../crossconcern/webscoket/websocket.services';
 import { LocalStorageRepositoryInterface } from '../../../datastore/local/localstorage.interface';
 import {logData} from "../../../crossconcern/helpers/generic/generic.helper";
@@ -96,6 +102,10 @@ export class HomeComponent implements OnInit{
 
     public onSettingsClick() {
         this.router.navigate(['/' + SETTINGS_PATH]);
+    }
+
+    public onPrivacyPolicyClick() {
+        this.router.navigate(["/" + POLICY_PRIVACY_PATH]);
     }
 
 }

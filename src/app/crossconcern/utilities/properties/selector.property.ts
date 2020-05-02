@@ -3,6 +3,7 @@ export const VIEW_SELECTOR = 'view';
 export const HOME_SELECTOR = 'home';
 export const GAME_SELECTOR = 'game';
 export const SETTINGS_SELECTOR = 'settings';
+export const POLICY_PRIVACY_SELECTOR = 'policy-privacy';
 export const SETUP_SELECTOR = 'setup';
 export const LOBBY_SELECTOR = 'lobby';
 
